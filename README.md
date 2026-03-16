@@ -6,12 +6,12 @@
 ## Overview
 This repository serves as a curated library of high-quality, verified datasets for Data-Driven Power System applications. The focus is on three critical domains: **Transmission Dynamic Events (PMU/Faults)**, **Distribution Network Topology**, and **Non-Intrusive Load Monitoring (NILM)**. 
 
-The datasets compiled here prioritize real-world grid conditions, verified simulation benchmarks, and include detailed statistics on sampling rates, class balance, and data schemas.
+The datasets compiled here prioritize real-world grid conditions and verified simulation benchmarks, and they include detailed statistics on sampling rates, class balance, and data schemas.
 
 ---
 
 ## 1. Transmission Dynamic Events & PMU Data
-**Focus:** Fault detection, oscillation monitoring, and grid stability using Phasor Measurement Units (PMU), SCADA logs, and high-resolution waveforms.
+**Focus:** Fault detection, oscillation monitoring, and grid stability using Phasor Measurement Units (PMU), SCADA logs, and high-resolution waveforms. All datasets exclude device-level maintenance data and are grounded in verified, peer-reviewed publications or official industry benchmarks.
 
 > 💡 **NAVIGATION TIP:** Click on any dataset name below to view detailed statistics, data schemas, and direct download links.
 
@@ -20,12 +20,11 @@ The datasets compiled here prioritize real-world grid conditions, verified simul
 | **1. [VSB Power Line Fault Detection](01_Transmission_Faults.md)** | Waveforms (50 Hz) | Partial Discharge (PD) Precursors | *Howard et al., "VSB Power Line Fault Detection," 2018.* |
 | **2. [UCI Electrical Grid Stability](01_Transmission_Faults.md)** | Numerical (Simulated) | Stable vs. Unstable Grid States | *Arzamasov et al., "Towards Concise Models of Grid Stability," IEEE 2018.* |
 | **3. [EPFL Campus Grid PMU Data](01_Transmission_Faults.md)** | PMU (50 Hz) | Voltage Sags, Normal Operations | *Pignati et al., "Real-time State Estimation of the EPFL-Campus Grid," 2016.* |
-| **4. [Electrical Line Fault Detection](01_Transmission_Faults.md)** | Waveforms (High Res) | 11 Types (L-G, L-L, 3-Phase Faults) | *Standard IEEE Benchmark Dataset, Figshare, 2023.* |
+| **4. [IEEE PMU-OSL Dataset](01_Transmission_Faults.md)** | PMU (30 Hz) | Forced Oscillations, Transmission Faults | *Wang et al., "Phasor Measurement Unit Dataset for Oscillation Source Location," IEEE DataPort.* |
 | **5. [IEEE 123-Node Fault Data](01_Transmission_Faults.md)** | Simulated SCADA/PMU | SLG, LL, LLG Fault Locations | *Dashtdar et al., "Fault Location in Radial Distribution Networks," 2022.* |
-| **6. [LANL Open Source Grid Events](01_Transmission_Faults.md)** | Topology/Events | Contingencies, Line Outages | *Coffrin et al., "PowerModels.jl: Open-Source Framework," PSCC 2018.* |
+| **6. [HIL Cyber-Power Testbed PMU Data](01_Transmission_Faults.md)** | PMU (30 Hz) | Single/Multi-Phase Transmission Faults | *Mustafa et al., "Hardware-In-The-Loop Cyber-Power Testbed," IEEE.* |
 | **7. [ORNL Transmission Signatures](01_Transmission_Faults.md)** | PMU (60 Hz) | Frequency Events, Oscillations | *Bank et al., "Visualization of Wide-Area Frequency Measurement," 2010.* |
-| **8. [Power System Faults (SCADA)](01_Transmission_Faults.md)** | SCADA Logs (1/min) | Line Break, Transformer Failure | *Applied ML Benchmark for Predictive Maintenance, Kaggle.* ||
-
+| **8. [BPA PMU Line Event Dataset](01_Transmission_Faults.md)** | PMU Streams | L-G, L-L Transmission Fault Signatures | *"Smart grid line event classification using supervised learning over PMU data streams," IEEE IGSC 2015.* |
 ---
 
 ## 2. Distribution Network Topology & Loading
