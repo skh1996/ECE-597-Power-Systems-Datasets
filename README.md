@@ -1,7 +1,8 @@
 # High-Fidelity Power Systems Datasets (ECE-597)
 
 **Author:** Saad Khan | MS in Electrical Engineering, Illinois Institute of Technology  
-**Course:** ECE-597 (Special Problems)  
+**Course:** ECE-597 (Special Problems)
+**Professor:** Mr. Ren Wang
 
 ## Overview
 This repository serves as a curated library of high-quality, verified datasets for Data-Driven Power System applications. The focus is on three critical domains: **Transmission Dynamic Events (PMU/Faults)**, **Distribution Network Topology**, and **Non-Intrusive Load Monitoring (NILM)**. 
