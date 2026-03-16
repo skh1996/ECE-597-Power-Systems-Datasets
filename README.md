@@ -2,7 +2,6 @@
 
 **Author:** Saad Khan | MS in Electrical Engineering, Illinois Institute of Technology  
 **Course:** ECE-597 (Special Problems)
-
 **Professor:** Mr. Ren Wang
 
 ## Overview
