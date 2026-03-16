@@ -10,7 +10,7 @@ The datasets compiled here prioritize real-world grid conditions, verified simul
 
 ---
 
-## 1. Transmission Dynamic Events & PMU Data
+## 1. Powerline Fault Detection / Transmission Dynamic Events & PMU Data
 **Focus:** Fault detection, oscillation monitoring, and grid stability using Phasor Measurement Units (PMU) and high-resolution waveforms.
 
 ### Dataset Summary Table
