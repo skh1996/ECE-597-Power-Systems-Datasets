@@ -35,7 +35,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 ### 3. EPFL Campus Grid PMU Data
 * **Description:** Real-world Phasor Measurement Unit (PMU) data collected from a live university campus grid in Switzerland during normal and anomalous operations.
-* **Download Link:** [EPFL Infoscience Repository](https://github.com/DESL-EPFL/Point-on-wave-Data-of-EPFL-campus-Distribution-Network/blob/master/BESS_0_to_m200.mat)
+* **Download Link:** [EPFL Infoscience Repository](https://github.com/DESL-EPFL/Point-on-wave-Data-of-EPFL-campus-Distribution-Network/tree/master)
 * **Data Statistics:** Standard European Grid Frequency (50 Hz). Multi-day continuous logging. 
 * **What the Data Sample Looks Like:** Time-series `.csv` files containing high-resolution synchrophasor measurements.
 * **Visual Sample (First 2 Rows):**
