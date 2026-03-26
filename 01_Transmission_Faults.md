@@ -63,17 +63,32 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez, *"Test Cases Library on Forced/Sustained Power System Oscillations"*, IEEE DataPort, 2025. DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 
-### 5. IEEE 123-Node Fault Data
-* **Description:** Simulated SCADA and PMU fault data applied to the standard IEEE 123-node distribution feeder, bridging transmission-level analysis with distribution topology.
-* **Download Link:** [IEEE Dataport (Search: IEEE 123 Node Faults)](https://ieee-dataport.org/)
-* **Data Statistics:** Balanced fault types applied across multiple network buses to simulate geographic fault location problems.
-* **What the Data Sample Looks Like:** Structured `.csv` files mapping nodes to per-unit electrical readings and fault targets.
-* **Visual Sample (First 2 Rows):**
+### 5. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
 
-| Timestamp | Node_ID | Voltage_pu | Current_pu | Fault_Location_Target |
-| :--- | :--- | :--- | :--- | :--- |
-| 0.016 | Bus_54 | 0.98 | 1.05 | None |
-| 0.032 | Bus_54 | 0.45 | 4.12 | Bus_54_SLG |
+- **Description:** A first-of-its-kind open-access multi-scale PMU time-series dataset generated through a novel joint Transmission + Distribution (T+D) co-simulation platform (PSS/E 23-bus transmission + two IEEE 13-bus distribution systems via OpenDSS). Contains millisecond-resolution voltage, current, and power measurements across transmission buses during labeled dynamic disturbance events — including short-circuit faults, generator trips, load changes, and natural oscillations. Developed by Texas A&M University, USC, MIT, and Purdue University. Published in *Nature Scientific Data* (2022).
+- **Download Link:** [Zenodo — PSML Dataset (DOI: 10.5281/zenodo.5130612)](https://zenodo.org/record/5130612)
+  > ```
+  > wget https://zenodo.org/record/5130612/files/PSML.zip?download=1
+  > ```
+  > GitHub (code + benchmarks): [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
+- **Data Statistics:**
+  - Millisecond-resolution PMU streams: **960 time steps × 91 channels** per scenario (voltage magnitude, voltage phase angle, current magnitude, current phase angle, real power, reactive power, frequency)
+  - Disturbance types: short-circuit faults, generator trips, load disturbances, natural oscillations — each with labeled `info.csv` (start time, end time, location, type)
+  - Minute-resolution load + renewable data: 66 U.S. load zones, 2018–2020 (3 years)
+  - License: CC BY 4.0
+- **Data Format:** `.csv` files organized per disturbance scenario:
+  - `trans.csv` — Transmission bus voltages and branch power flows (millisecond resolution)
+  - `dist.csv` — Three-phase distribution node voltages (millisecond resolution)
+  - `info.csv` — Disturbance metadata: type, start/end time, source location
+- **What the Data Sample Looks Like:** Each disturbance scenario folder contains three `.csv` files. The transmission file (`trans.csv`) has millisecond timestamps with per-unit voltage at each bus and active/reactive power on each branch.
+- **Visual Sample (Illustrative Schema — `trans.csv`):**
+
+| Time(s) | VOLT\_151 (pu) | VOLT\_152 (pu) | POWR\_151\_TO\_152 (pu) | VARS\_151\_TO\_152 (pu) | Disturbance\_Type |
+| --- | --- | --- | --- | --- | --- |
+| 0.0000 | 1.023 | 1.019 | 0.412 | 0.087 | Normal |
+| 0.0167 | 0.651 | 0.704 | 1.823 | 0.541 | Short\_Circuit\_Fault |
+
+- **Citation:** Zheng, X., Xu, N., Trinh, L., Wu, D., Huang, T., Sivaranjani, S., Liu, Y., & Xie, L. (2022). *A multi-scale time-series dataset with benchmark for machine learning in decarbonized energy grids.* Nature Scientific Data, 9, 359. DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
 
 
 ### 6. HIL Cyber-Power Testbed PMU Data
