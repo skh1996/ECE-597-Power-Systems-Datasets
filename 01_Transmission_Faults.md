@@ -46,12 +46,21 @@ As per project requirements, the datasets below strictly focus on transmission a
 | 1459451121.02 | 20.122 | 0.453 | 49.978 | -0.015 |
 
 
-### 4. IEEE PMU-OSL Dataset
-* **Description:** Verified Phasor Measurement Unit (PMU) data of transmission dynamic events, including forced oscillations and short-circuit faults, simulated on the WECC 179-bus system alongside real-world event data.
-* **Download Link:** [IEEE DataPort - PMU-OSL](https://ieee-dataport.org/open-access/phasor-measurement-unit-dataset-oscillation-source-location)
-* **Data Statistics:** 30 Hz sampling rate. Contains cleanly labeled temporal data for both localized and wide-area transmission oscillation events.
-* **What the Data Sample Looks Like:** Time-series `.csv` files containing timestamped voltage magnitudes, phase angles, and frequency across multiple transmission buses.
-* **Visual Sample (First 2 Rows):**
+### 4. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
+
+- **Description:** A comprehensive benchmark library of PMU and Point-on-Wave (PoW) data for power system oscillation source location. Includes simulated forced and natural mode oscillation cases on the WECC 179-bus and WECC 240-bus systems, 6 actual oscillatory event recordings from ISO New England, and a new PoW dataset on a 14-bus inverter-based system. Developed by ISO New England and the University of Tennessee, Knoxville, and used as the official dataset for the 2021 IEEE-NASPI Oscillation Source Location Contest.
+- **Download Link:** [IEEE DataPort — Test Cases Library on Forced/Sustained Power System Oscillations](https://ieee-dataport.org/documents/test-cases-library-forcedsustained-power-system-oscillations)
+- **Data Statistics:** PMU data sampled at 30 Hz (WECC 179-bus: 18 forced oscillation + 9 natural mode cases; WECC 240-bus: 13 forced oscillation cases; ISO New England: 6 real-world events). PoW data on a 14-bus system: 6 forced + 5 natural mode cases. Total download size: ~540 MB across four archives.
+- **Data Formats:** `.txt` and `.csv` for PMU data; `.mat` for PoW data; simulation model files in `.raw`, `.dyr`, `.pfb`, `.dat` formats (compatible with Powertech DSATools/TSAT and PSS/E).
+- **What the Data Sample Looks Like:** Each PMU case folder contains separate `.txt` files for bus voltage magnitudes (`BusVolMag`), bus voltage angles (`BusVolAng`), line current magnitudes (`LinCurMag`), and line current angles (`LinCurAng`), plus rotor speed and angle for generator buses. ISO-NE real-world cases are provided as `.csv` files.
+- **Visual Sample (Illustrative Schema):**
+
+| Time_s | BusVolMag (pu) | BusVolAng (deg) | LinCurMag (pu) | LinCurAng (deg) | RotorSpd (pu) |
+| --- | --- | --- | --- | --- | --- |
+| 0.000 | 1.024 | -14.82 | 0.412 | -22.10 | 1.000 |
+| 0.033 | 1.021 | -15.10 | 0.431 | -23.40 | 0.999 |
+
+- **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez, *"Test Cases Library on Forced/Sustained Power System Oscillations"*, IEEE DataPort, 2025. DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 | Timestamp | Bus_ID | Voltage_Mag_pu | Phase_Angle_deg | Frequency_Hz | Event_Type |
 | :--- | :--- | :--- | :--- | :--- | :--- |
