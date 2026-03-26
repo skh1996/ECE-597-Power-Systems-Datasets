@@ -67,15 +67,11 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 - **Description:** A first-of-its-kind open-access multi-scale PMU time-series dataset generated through a novel joint Transmission + Distribution (T+D) co-simulation platform (PSS/E 23-bus transmission + two IEEE 13-bus distribution systems via OpenDSS). Contains millisecond-resolution voltage, current, and power measurements across transmission buses during labeled dynamic disturbance events — including short-circuit faults, generator trips, load changes, and natural oscillations. Developed by Texas A&M University, USC, MIT, and Purdue University. Published in *Nature Scientific Data* (2022).
 - **Download Link:** [Zenodo — PSML Dataset (DOI: 10.5281/zenodo.5130612)](https://zenodo.org/record/5130612)
-  > ```
-  > wget https://zenodo.org/record/5130612/files/PSML.zip?download=1
-  > ```
-  > GitHub (code + benchmarks): [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
+> GitHub (Code + benchmarks): [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
 - **Data Statistics:**
   - Millisecond-resolution PMU streams: **960 time steps × 91 channels** per scenario (voltage magnitude, voltage phase angle, current magnitude, current phase angle, real power, reactive power, frequency)
   - Disturbance types: short-circuit faults, generator trips, load disturbances, natural oscillations — each with labeled `info.csv` (start time, end time, location, type)
   - Minute-resolution load + renewable data: 66 U.S. load zones, 2018–2020 (3 years)
-  - License: CC BY 4.0
 - **Data Format:** `.csv` files organized per disturbance scenario:
   - `trans.csv` — Transmission bus voltages and branch power flows (millisecond resolution)
   - `dist.csv` — Three-phase distribution node voltages (millisecond resolution)
