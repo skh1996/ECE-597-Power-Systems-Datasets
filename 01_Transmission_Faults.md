@@ -109,7 +109,8 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 - **Description:** A large open-source repository of real transmission-level PMU data, developed by ORNL and LLNL under the DOE Office of Electricity. It includes 1,694 labeled transmission events and 2,500+ total PMU and Point-on-Wave signatures collected from U.S. utilities across two interconnections. Events cover generator trips, oscillations, faults, frequency disturbances, and line trips, all anonymized and consistently labeled.
 
-- **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gsl.ornl.gov)  
+- - **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gesl.ornl.gov)
+  > ⚠️ Free account required (valid email only). Data accessible via web Dashboard or Python API. 
   
 - **Data Statistics:**  
   1,694 unique labeled transmission PMU events. PMU data at 30–60 Hz reporting rate; PoW data at higher resolution. Data spans two U.S. interconnections, multiple utility providers, and diverse instrument configurations. Uniform event taxonomy applied across Primary, Class, and Sub-Class label levels.
