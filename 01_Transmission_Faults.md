@@ -62,11 +62,6 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 - **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez, *"Test Cases Library on Forced/Sustained Power System Oscillations"*, IEEE DataPort, 2025. DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
-| Timestamp | Bus_ID | Voltage_Mag_pu | Phase_Angle_deg | Frequency_Hz | Event_Type |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 0.000 | 83 | 1.025 | -15.24 | 60.001 | Ambient |
-| 0.033 | 83 | 1.021 | -15.30 | 59.985 | Oscillation |
-
 
 ### 5. IEEE 123-Node Fault Data
 * **Description:** Simulated SCADA and PMU fault data applied to the standard IEEE 123-node distribution feeder, bridging transmission-level analysis with distribution topology.
