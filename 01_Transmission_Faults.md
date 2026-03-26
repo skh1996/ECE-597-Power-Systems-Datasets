@@ -89,11 +89,11 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 ### 6. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
 
-- **Description:** High-fidelity, time-synchronized synchrophasor recordings generated from a real-time Hardware-in-the-Loop (HIL) testbed integrating the IEEE 39-bus transmission system with 26 optimally placed PMUs. The testbed combines a Real-Time Digital Simulator (RTDS), hardware and software PMUs, a Real-Time Automation Controller (RTAC), PingThings cloud platform, and ns-3 network emulation — reproducing realistic grid behavior including communication delays and event-driven dynamics. Covers generator trips and reconnections, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded). An earlier version of this dataset served as the official competition dataset at IEEE SGSMA 2024, Washington DC.
+- **Description:** High-fidelity synchrophasor recordings from a real-time Hardware-in-the-Loop (HIL) testbed built on the IEEE 39-bus transmission system with 26 optimally placed PMUs. Integrates RTDS, hardware PMUs, RTAC, and ns-3 network emulation to reproduce realistic grid dynamics including communication delays. Covers generator trips, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded).
 - **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
   > Free IEEE account required. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
-- **Data Statistics:** 26 PMU measurement points on the IEEE 39-bus system. 14 variables per PMU per timestamp: three-phase voltage magnitudes and angles, three-phase current magnitudes and angles, system frequency, and ROCOF. IEEE C37.118 compliant, GPS-synchronized. Pre-split into Training and Testing folders, one `.csv` per PMU. Total size: ~315 MB.
-- **What the Data Sample Looks Like:** Individual `.csv` files per PMU (e.g., `PMU51.csv` through `PMU74.csv`, `SEL401.csv`, `SEL451.csv`), each a time-series table of 14 electrical measurement columns with an event label per row.
+- **Data Statistics:** 26 PMU buses on the IEEE 39-bus system. 14 variables per timestamp: three-phase voltage/current magnitudes and angles, frequency, and ROCOF. IEEE C37.118 compliant, GPS-synchronized. Pre-split into Training/Testing folders, one `.csv` per PMU. Total size: ~315 MB.
+- **What the Data Sample Looks Like:** Individual `.csv` files per PMU (e.g., `PMU51.csv` through `PMU74.csv`, `SEL401.csv`, `SEL451.csv`), each containing 14 electrical measurement columns with an event label per row.
 - **Visual Sample (Illustrative Schema):**
 
 | Timestamp | Va_mag (pu) | Va_ang (deg) | Ia_mag (pu) | Ia_ang (deg) | Freq_Hz | ROCOF | Event_Label |
