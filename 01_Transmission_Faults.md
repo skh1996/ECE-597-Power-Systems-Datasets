@@ -92,6 +92,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Description:** High-fidelity synchrophasor recordings from a real-time Hardware-in-the-Loop (HIL) testbed built on the IEEE 39-bus transmission system with 26 optimally placed PMUs. Integrates RTDS, hardware PMUs, RTAC, and ns-3 network emulation to reproduce realistic grid dynamics including communication delays. Covers generator trips, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded).
 - **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
   > Free IEEE account required. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
+
 - **Data Statistics:** 26 PMU buses on the IEEE 39-bus system. 14 variables per timestamp: three-phase voltage/current magnitudes and angles, frequency, and ROCOF. IEEE C37.118 compliant, GPS-synchronized. Pre-split into Training/Testing folders, one `.csv` per PMU. Total size: ~315 MB.
 - **What the Data Sample Looks Like:** Individual `.csv` files per PMU (e.g., `PMU51.csv` through `PMU74.csv`, `SEL401.csv`, `SEL451.csv`), each containing 14 electrical measurement columns with an event label per row.
 - **Visual Sample (Illustrative Schema):**
@@ -104,17 +105,29 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** M. Mustafa Hussain, Purna Kukadiya, Anurag Srivastava, *"High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed for State Estimation and Event Analysis,"* IEEE DataPort, December 2025. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
 
-### 7. ORNL Transmission Signatures
-* **Description:** PMU frequency events and wide-area oscillations captured from the US grid, useful for frequency stability analysis.
-* **Download Link:** [DOE / ORNL Datasets](https://www.ornl.gov/)
-* **Data Statistics:** 60 Hz sampling rate, capturing real-world frequency dips and generator tripping events.
-* **What the Data Sample Looks Like:** Time-series tables containing standard synchrophasor event flags.
-* **Visual Sample (First 2 Rows):**
+### 7. ORNL Grid Event Signature Library (GESL) — Transmission Signature Library
 
-| Timestamp | Frequency_Hz | ROCOF | Event_Flag |
-| :--- | :--- | :--- | :--- |
-| 2021-08-14 14:05:00.12 | 60.012 | 0.001 | 0 |
-| 2021-08-14 14:05:00.15 | 59.850 | -0.152 | Gen_Trip |
+- **Description:** A large open-source repository of real transmission-level PMU data, developed by ORNL and LLNL under the DOE Office of Electricity. It includes 1,694 labeled transmission events and 2,500+ total PMU and Point-on-Wave signatures collected from U.S. utilities across two interconnections. Events cover generator trips, oscillations, faults, frequency disturbances, and line trips, all anonymized and consistently labeled.
+
+- **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gsl.ornl.gov)  
+  
+- **Data Statistics:**  
+  1,694 unique labeled transmission PMU events. PMU data at 30–60 Hz reporting rate; PoW data at higher resolution. Data spans two U.S. interconnections, multiple utility providers, and diverse instrument configurations. Uniform event taxonomy applied across Primary, Class, and Sub-Class label levels.
+
+- **What the Data Sample Looks Like:**  
+  Each event record is a `.csv` file containing time-series synchrophasor measurements (voltage magnitude, voltage angle, current magnitude, current angle, frequency, ROCOF) from one or more PMUs, along with an event tag and metadata file.
+
+- **Visual Sample (Illustrative Schema):**
+
+| Timestamp              | V_mag (pu) | V_ang (deg) | Freq_Hz | ROCOF  | Event_Tag      |
+|------------------------|------------|--------------|---------|--------|----------------|
+| 2021-08-14 14:05:00.12 | 1.021      | -14.85       | 60.012  | 0.001  | Normal         |
+| 2021-08-14 14:05:00.15 | 0.874      | -18.20       | 59.850  | -0.152 | Generator_Trip |
+
+- **Citation:**  
+  Aaron J. Wilson, Ali Riza Ekti, Jim Follum, Shuchismita Biswas, Christabella Annalicia, Jhi-Young Joo, Omer Aziz, Jamie Lian,  
+  *"The Grid Event Signature Library: An Open-Access Repository of Power System Measurement Signatures,"* IEEE Access, May 2024.  
+  DOI: https://doi.org/10.1109/ACCESS.2024.3404886
 
 
 ### 8. BPA PMU Line Event Dataset
