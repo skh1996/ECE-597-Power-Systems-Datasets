@@ -87,17 +87,21 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** Zheng, X., Xu, N., Trinh, L., Wu, D., Huang, T., Sivaranjani, S., Liu, Y., & Xie, L. (2022). *A multi-scale time-series dataset with benchmark for machine learning in decarbonized energy grids.* Nature Scientific Data, 9, 359. DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
 
 
-### 6. HIL Cyber-Power Testbed PMU Data
-* **Description:** Hardware-In-The-Loop (HIL) synchrophasor recordings from an IEEE 39-bus system emulation. Features cleanly annotated dynamic events, including single and multi-phase transmission faults.
-* **Download Link:** [IEEE DataPort / ResearchGate (Mustafa et al.)](https://ieee-dataport.org/)
-* **Data Statistics:** 30 Hz reporting rate, IEEE C37.118 compliant PMU streams. Contains balanced classes of L-G, L-L, and 3-phase faults.
-* **What the Data Sample Looks Like:** Tabular `.csv` files capturing synchronous positive sequence voltage and current phasors during transient states.
-* **Visual Sample (First 2 Rows):**
+### 6. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
 
-| Time_s | V1_mag | V1_angle | I1_mag | I1_angle | Fault_Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1.100 | 1.042 | -8.50 | 0.512 | -15.20 | Normal |
-| 1.133 | 0.650 | -12.10 | 4.850 | -45.60 | L-G_Fault |
+- **Description:** High-fidelity, time-synchronized synchrophasor recordings generated from a real-time Hardware-in-the-Loop (HIL) testbed integrating the IEEE 39-bus transmission system with 26 optimally placed PMUs. The testbed combines a Real-Time Digital Simulator (RTDS), hardware and software PMUs, a Real-Time Automation Controller (RTAC), PingThings cloud platform, and ns-3 network emulation — reproducing realistic grid behavior including communication delays and event-driven dynamics. Covers generator trips and reconnections, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded). An earlier version of this dataset served as the official competition dataset at IEEE SGSMA 2024, Washington DC.
+- **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
+  > Free IEEE account required. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
+- **Data Statistics:** 26 PMU measurement points on the IEEE 39-bus system. 14 variables per PMU per timestamp: three-phase voltage magnitudes and angles, three-phase current magnitudes and angles, system frequency, and ROCOF. IEEE C37.118 compliant, GPS-synchronized. Pre-split into Training and Testing folders, one `.csv` per PMU. Total size: ~315 MB.
+- **What the Data Sample Looks Like:** Individual `.csv` files per PMU (e.g., `PMU51.csv` through `PMU74.csv`, `SEL401.csv`, `SEL451.csv`), each a time-series table of 14 electrical measurement columns with an event label per row.
+- **Visual Sample (Illustrative Schema):**
+
+| Timestamp | Va_mag (pu) | Va_ang (deg) | Ia_mag (pu) | Ia_ang (deg) | Freq_Hz | ROCOF | Event_Label |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.100 | 1.042 | -8.50 | 0.512 | -15.20 | 60.001 | 0.000 | Normal |
+| 1.133 | 0.651 | -12.10 | 4.850 | -45.60 | 59.980 | -0.042 | Fault_Event |
+
+- **Citation:** M. Mustafa Hussain, Purna Kukadiya, Anurag Srivastava, *"High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed for State Estimation and Event Analysis,"* IEEE DataPort, December 2025. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
 
 ### 7. ORNL Transmission Signatures
