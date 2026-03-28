@@ -17,7 +17,6 @@ The datasets compiled here prioritize real-world grid conditions and verified si
 
 | Dataset Name | Data Type (Sampling) | Events / Labels | Verified Paper / Benchmark |
 | :--- | :--- | :--- | :--- |
-
 | **1. [UCI Electrical Grid Stability](01_Transmission_Faults.md)** | Numerical (Simulated) | Stable vs. Unstable Grid States | *Arzamasov et al., "Towards Concise Models of Grid Stability," IEEE 2018.* |
 | **2. [EPFL Campus Grid PMU Data](01_Transmission_Faults.md)** | PMU (50 Hz) | Voltage Sags, Normal Operations | *Pignati et al., "Real-time State Estimation of the EPFL-Campus Grid," 2016.* |
 | **3. [IEEE Test Cases Library — Forced/Sustained Power System Oscillations](https://github.com/skh1996/ECE-597-Power-Systems-Datasets/blob/main/01_Transmission_Faults.md)** | PMU (.txt/.csv) + PoW (.mat) | Forced Oscillations, Natural Mode Oscillations, Actual ISO-NE Events | *Wang et al., "Test Cases Library on Forced/Sustained Power System Oscillations," IEEE DataPort, DOI: 10.21227/a6hg-n822, 2025.* |
