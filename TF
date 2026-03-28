@@ -1,0 +1,271 @@
+# ⚡ Transmission Dynamic Events & PMU Dataset Collection
+
+## 📌 Overview
+This repository curates **high-quality, openly accessible datasets** for research in:
+
+- Transmission system fault detection  
+- PMU-based dynamic event analysis  
+- Power system oscillations and disturbances  
+- Grid stability and anomaly detection  
+
+All datasets are:
+- 📖 Backed by **peer-reviewed publications** OR official repositories  
+- ⚡ Focused on **transmission / high-level grid dynamics**  
+- 🚫 Excluding device-level logs and maintenance data  
+
+---
+
+## 🧭 Dataset Summary
+
+| # | Dataset | Type | Grid Level | Real / Simulated | Key Use |
+|--|--------|------|------------|------------------|--------|
+| 1 | VSB Fault Detection | Time-series | Distribution | Real | Partial discharge detection |
+| 2 | UCI Grid Stability | Tabular | Transmission (simplified) | Simulated | Stability prediction |
+| 3 | EPFL PMU | PMU | Distribution | Real | Synchrophasor analysis |
+| 4 | IEEE Oscillation Library | PMU + PoW | Transmission | Mixed | Oscillation detection |
+| 5 | PSML | PMU | T+D | Simulated | ML benchmarking |
+| 6 | HIL PMU (IEEE 39) | PMU | Transmission | HIL | Event detection |
+| 7 | ORNL GESL | PMU + PoW | Transmission | Real | Event classification |
+| 8 | IRTSD (IBR Dataset) | EMT + PMU | Transmission | Simulated | IBR disturbance analysis |
+
+---
+
+# 📂 Datasets
+
+---
+
+## 1. VSB Power Line Fault Detection
+
+- **Description:**  
+  High-frequency three-phase voltage signals used to detect **partial discharge (PD)** — an early indicator of insulation failure.
+
+- **Download:**  
+  https://www.kaggle.com/c/vsb-power-line-fault-detection/data
+
+- **Data Characteristics:**
+  - 8,712 signals  
+  - 800,000 samples per signal (20 ms window)  
+  - Highly imbalanced (~5% faults)  
+
+- **Format:** `.parquet`
+
+- **Use Cases:**
+  - Fault precursor detection  
+  - Signal classification  
+  - Imbalance learning  
+
+- **Citation:**
+  - VSB Power Line Fault Detection Dataset, Kaggle Competition (2018)  
+  - Misák et al., *IEEE TDEI*, 2017 (background literature)
+
+---
+
+## 2. UCI Electrical Grid Stability
+
+- **Description:**  
+  Simulated 4-node grid modeling system stability under control disturbances.
+
+- **Download:**  
+  https://archive.ics.uci.edu/dataset/471/electrical+grid+stability+simulated+data
+
+- **Data Characteristics:**
+  - 60,000 samples  
+  - 12 features + 1 label  
+
+- **Format:** `.csv`
+
+- **Use Cases:**
+  - Stability classification  
+  - Control response modeling  
+
+- **Citation:**  
+  Arzamasov et al., *SmartGridComm*, 2018  
+
+---
+
+## 3. EPFL Campus PMU Dataset
+
+- **Description:**  
+  Real-world synchrophasor data collected from a live campus grid in Switzerland.
+
+- **Download:**  
+  https://github.com/DESL-EPFL/Point-on-wave-Data-of-EPFL-campus-Distribution-Network
+
+- **Data Characteristics:**
+  - 50 Hz system  
+  - Multi-day continuous recording  
+
+- **Format:** `.csv`
+
+- **Use Cases:**
+  - State estimation  
+  - Frequency and ROCOF analysis  
+
+- **Citation:**  
+  Pignati et al., *IEEE ISGT*, 2015  
+
+---
+
+## 4. IEEE Oscillation Test Case Library
+
+- **Description:**  
+  Benchmark dataset for **oscillation source location**, including:
+  - WECC system simulations  
+  - Real ISO New England events  
+
+- **Download:**  
+  https://ieee-dataport.org/documents/test-cases-library-forcedsustained-power-system-oscillations
+
+- **Data Characteristics:**
+  - PMU data: 30 Hz  
+  - Real + simulated events  
+  - ~540 MB total  
+
+- **Formats:** `.csv`, `.txt`, `.mat`
+
+- **Use Cases:**
+  - Oscillation detection  
+  - Source localization  
+
+- **Citation:**  
+  Wang et al., IEEE DataPort, 2025  
+
+---
+
+## 5. PSML (Multi-Scale PMU Dataset)
+
+- **Description:**  
+  Transmission + Distribution co-simulation dataset with labeled disturbances.
+
+- **Download:**  
+  https://zenodo.org/record/5130612  
+
+- **Data Characteristics:**
+  - Millisecond resolution  
+  - 91 measurement channels  
+  - Includes renewable + load data  
+
+- **Formats:** `.csv`
+
+- **Use Cases:**
+  - ML benchmarking  
+  - Event classification  
+
+- **Citation:**  
+  Zheng et al., *Nature Scientific Data*, 2022  
+
+---
+
+## 6. HIL Synchrophasor Dataset (IEEE 39-Bus)
+
+- **Description:**  
+  Real-time Hardware-in-the-Loop dataset simulating realistic grid + communication behavior.
+
+- **Download:**  
+  https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event  
+
+- **Data Characteristics:**
+  - 26 PMUs  
+  - IEEE C37.118 compliant  
+  - Includes communication delays  
+
+- **Formats:** `.csv`
+
+- **Use Cases:**
+  - Event detection  
+  - Cyber-physical analysis  
+
+- **Citation:**  
+  Hussain et al., IEEE DataPort, 2025  
+
+---
+
+## 7. ORNL Grid Event Signature Library (GESL)
+
+- **Description:**  
+  Large-scale real-world PMU dataset from U.S. utilities.
+
+- **Download:**  
+  https://gesl.ornl.gov  
+
+- **Data Characteristics:**
+  - 1,694 labeled events  
+  - Multi-utility coverage  
+  - PMU + Point-on-Wave  
+
+- **Formats:** `.csv`
+
+- **Use Cases:**
+  - Event classification  
+  - Real-world benchmarking  
+
+- **Citation:**  
+  Wilson et al., *IEEE Access*, 2024  
+
+---
+
+## 8. IRTSD — IBR-Rich Transmission Disturbance Dataset
+
+- **Description:**  
+  High-fidelity electromagnetic transient dataset for **IBR-dominated grids (~40% renewable penetration)**.
+
+- **Download:**  
+  https://ieee-dataport.org/open-access/irtsd-open-source-data-and-toolset-electromagnetic-transient-analysis-disturbances-and  
+
+- **Data Characteristics:**
+  - 5,500 events  
+  - ~1.4 million signals  
+  - Frequency range: 0.5 Hz – 4 kHz  
+  - ~29 GB dataset  
+
+- **Formats:** `.csv` + PSCAD models  
+
+- **Use Cases:**
+  - IBR disturbance analysis  
+  - High-frequency transient modeling  
+  - ML for renewable-heavy grids  
+
+- **Citation:**  
+  Ross & Mahapatra, IEEE DataPort, 2024  
+
+---
+
+# 🧠 Key Strength of This Collection
+
+This repository uniquely combines:
+
+- ✅ Real-world PMU data (GESL, EPFL)  
+- ✅ Simulation datasets (PSML, IRTSD)  
+- ✅ Hardware-in-the-loop data (HIL dataset)  
+- ✅ Oscillation + fault datasets  
+- ✅ Modern grid scenarios (IBR / renewable dynamics)
+
+---
+
+# ⚠️ Notes
+
+- Some datasets are **simulation-based**, which is standard in power systems due to limited public utility data  
+- All datasets are selected based on **research relevance and reproducibility**
+
+---
+
+# 🚀 How to Use
+
+These datasets are suitable for:
+
+- Fault detection  
+- Event classification  
+- Oscillation analysis  
+- Machine learning / deep learning  
+- PMU-based monitoring systems  
+
+---
+
+# 📬 Contributions
+
+If you know additional high-quality datasets in:
+- PMU analysis  
+- Transmission disturbances  
+- Renewable grid dynamics  
+
+Feel free to contribute!
