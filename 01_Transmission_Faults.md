@@ -19,6 +19,8 @@ As per project requirements, the datasets below strictly focus on transmission a
 | 0 | 18 | -16 | -5 | 0 |
 | 1 | 17 | -17 | -6 | 1 |
 
+- **Citation:** S. Misák, J. Fulnecek, T. Vantuch, T. Buriánek, T. Jezowicz, *"A Complex Classification Approach of Partial Discharges from Covered Conductors in Real Environment,"* IEEE Transactions on Dielectrics and Electrical Insulation, vol. 24, no. 2, pp. 1097–1104, 2017. DOI: [10.1109/TDEI.2017.006135](https://doi.org/10.1109/TDEI.2017.006135)
+
 
 ### 2. UCI Electrical Grid Stability
 * **Description:** A mathematically rigorous simulated dataset representing a 4-node star architecture grid, predicting system stability after control disturbances.
@@ -32,6 +34,8 @@ As per project requirements, the datasets below strictly focus on transmission a
 | 2.959 | 3.079 | 3.763 | -1.221 | 0.650 | unstable |
 | 9.304 | 4.902 | 2.009 | -1.469 | 0.859 | stable |
 
+- **Citation:** V. Arzamasov, K. Böhm, P. Jochem, *"Towards Concise Models of Grid Stability,"* 2018 IEEE International Conference on Communications, Control, and Computing Technologies for Smart Grids (SmartGridComm), Aalborg, 2018, pp. 1–6. DOI: [10.1109/SmartGridComm.2018.8587498](https://doi.org/10.1109/SmartGridComm.2018.8587498)
+
 
 ### 3. EPFL Campus Grid PMU Data
 * **Description:** Real-world Phasor Measurement Unit (PMU) data collected from a live university campus grid in Switzerland during normal and anomalous operations.
@@ -44,6 +48,8 @@ As per project requirements, the datasets below strictly focus on transmission a
 | :--- | :--- | :--- | :--- | :--- |
 | 1459451121.00 | 20.124 | 0.451 | 49.981 | -0.012 |
 | 1459451121.02 | 20.122 | 0.453 | 49.978 | -0.015 |
+
+- **Citation:** M. Pignati, L. Zanni, P. Romano, R. Cherkaoui, M. Paolone, *"Real-Time State Estimation of the EPFL-Campus Medium-Voltage Grid by Using PMUs,"* IEEE PES Innovative Smart Grid Technologies Conference (ISGT), Washington DC, 2015. DOI: [10.1109/ISGT.2015.7131877](https://doi.org/10.1109/ISGT.2015.7131877)
 
 
 ### 4. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
@@ -67,7 +73,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 - **Description:** A first-of-its-kind open-access multi-scale PMU time-series dataset generated through a novel joint Transmission + Distribution (T+D) co-simulation platform (PSS/E 23-bus transmission + two IEEE 13-bus distribution systems via OpenDSS). Contains millisecond-resolution voltage, current, and power measurements across transmission buses during labeled dynamic disturbance events — including short-circuit faults, generator trips, load changes, and natural oscillations. Developed by Texas A&M University, USC, MIT, and Purdue University. Published in *Nature Scientific Data* (2022).
 - **Download Link:** [Zenodo — PSML Dataset (DOI: 10.5281/zenodo.5130612)](https://zenodo.org/record/5130612)
-> GitHub (Code + benchmarks): [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
+- **GitHub (Code + Benchmarks):** [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
 - **Data Statistics:**
   - Millisecond-resolution PMU streams: **960 time steps × 91 channels** per scenario (voltage magnitude, voltage phase angle, current magnitude, current phase angle, real power, reactive power, frequency)
   - Disturbance types: short-circuit faults, generator trips, load disturbances, natural oscillations — each with labeled `info.csv` (start time, end time, location, type)
@@ -109,8 +115,8 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 - **Description:** A large open-source repository of real transmission-level PMU data, developed by ORNL and LLNL under the DOE Office of Electricity. It includes 1,694 labeled transmission events and 2,500+ total PMU and Point-on-Wave signatures collected from U.S. utilities across two interconnections. Events cover generator trips, oscillations, faults, frequency disturbances, and line trips, all anonymized and consistently labeled.
 
-- - **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gesl.ornl.gov)
-  > ⚠️ Free account required (valid email only). Data accessible via web Dashboard or Python API. 
+- **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gesl.ornl.gov)
+  > Note: Free account required. Data accessible via web Dashboard or Python API. 
   
 - **Data Statistics:**  
   1,694 unique labeled transmission PMU events. PMU data at 30–60 Hz reporting rate; PoW data at higher resolution. Data spans two U.S. interconnections, multiple utility providers, and diverse instrument configurations. Uniform event taxonomy applied across Primary, Class, and Sub-Class label levels.
