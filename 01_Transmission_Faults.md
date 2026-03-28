@@ -7,22 +7,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 ---
 
-### 1. VSB Power Line Fault Detection
-* **Description:** Three-phase voltage measurements from medium-voltage overhead lines to detect Partial Discharge (PD), a critical precursor to catastrophic grid failure.
-* **Download Link:** [Kaggle - VSB Power Line Fault Detection](https://www.kaggle.com/c/vsb-power-line-fault-detection/data)
-* **Data Statistics:** High-frequency 20ms duration signals (800,000 measurements per signal). 8,712 total signals. Highly Imbalanced (~95% Normal, ~5% Faults).
-* **What the Data Sample Looks Like:** A `.parquet` file containing continuous numeric arrays mapped to a binary target.
-* **Visual Sample (First 2 Rows):**
-
-| signal_id | phase_0 (V) | phase_1 (V) | phase_2 (V) | target |
-| :--- | :--- | :--- | :--- | :--- |
-| 0 | 18 | -16 | -5 | 0 |
-| 1 | 17 | -17 | -6 | 1 |
-
-- **Citation:** S. Misák, J. Fulnecek, T. Vantuch, T. Buriánek, T. Jezowicz, *"A Complex Classification Approach of Partial Discharges from Covered Conductors in Real Environment,"* IEEE Transactions on Dielectrics and Electrical Insulation, vol. 24, no. 2, pp. 1097–1104, 2017. DOI: [10.1109/TDEI.2017.006135](https://doi.org/10.1109/TDEI.2017.006135)
-
-
-### 2. UCI Electrical Grid Stability
+### 1. UCI Electrical Grid Stability
 * **Description:** A mathematically rigorous simulated dataset representing a 4-node star architecture grid, predicting system stability after control disturbances.
 * **Download Link:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/471/electrical+grid+stability+simulated+data)
 * **Data Statistics:** 60,000 instances total. 12 input features and 1 predictive target.
@@ -37,7 +22,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** V. Arzamasov, K. Böhm, P. Jochem, *"Towards Concise Models of Grid Stability,"* 2018 IEEE International Conference on Communications, Control, and Computing Technologies for Smart Grids (SmartGridComm), Aalborg, 2018, pp. 1–6. DOI: [10.1109/SmartGridComm.2018.8587498](https://doi.org/10.1109/SmartGridComm.2018.8587498)
 
 
-### 3. EPFL Campus Grid PMU Data
+### 2. EPFL Campus Grid PMU Data
 * **Description:** Real-world Phasor Measurement Unit (PMU) data collected from a live university campus grid in Switzerland during normal and anomalous operations.
 * **Download Link:** [EPFL Infoscience Repository](https://github.com/DESL-EPFL/Point-on-wave-Data-of-EPFL-campus-Distribution-Network/tree/master)
 * **Data Statistics:** Standard European Grid Frequency (50 Hz). Multi-day continuous logging. 
@@ -52,7 +37,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** M. Pignati, L. Zanni, P. Romano, R. Cherkaoui, M. Paolone, *"Real-Time State Estimation of the EPFL-Campus Medium-Voltage Grid by Using PMUs,"* IEEE PES Innovative Smart Grid Technologies Conference (ISGT), Washington DC, 2015. DOI: [10.1109/ISGT.2015.7131877](https://doi.org/10.1109/ISGT.2015.7131877)
 
 
-### 4. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
+### 3. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
 
 - **Description:** A comprehensive benchmark library of PMU and Point-on-Wave (PoW) data for power system oscillation source location. Includes simulated forced and natural mode oscillation cases on the WECC 179-bus and WECC 240-bus systems, 6 actual oscillatory event recordings from ISO New England, and a new PoW dataset on a 14-bus inverter-based system. Developed by ISO New England and the University of Tennessee, Knoxville, and used as the official dataset for the 2021 IEEE-NASPI Oscillation Source Location Contest.
 - **Download Link:** [IEEE DataPort — Test Cases Library on Forced/Sustained Power System Oscillations](https://ieee-dataport.org/documents/test-cases-library-forcedsustained-power-system-oscillations)
@@ -69,7 +54,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez, *"Test Cases Library on Forced/Sustained Power System Oscillations"*, IEEE DataPort, 2025. DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 
-### 5. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
+### 4. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
 
 - **Description:** A first-of-its-kind open-access multi-scale PMU time-series dataset generated through a novel joint Transmission + Distribution (T+D) co-simulation platform (PSS/E 23-bus transmission + two IEEE 13-bus distribution systems via OpenDSS). Contains millisecond-resolution voltage, current, and power measurements across transmission buses during labeled dynamic disturbance events — including short-circuit faults, generator trips, load changes, and natural oscillations. Developed by Texas A&M University, USC, MIT, and Purdue University. Published in *Nature Scientific Data* (2022).
 - **Download Link:** [Zenodo — PSML Dataset (DOI: 10.5281/zenodo.5130612)](https://zenodo.org/record/5130612)
@@ -93,7 +78,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** Zheng, X., Xu, N., Trinh, L., Wu, D., Huang, T., Sivaranjani, S., Liu, Y., & Xie, L. (2022). *A multi-scale time-series dataset with benchmark for machine learning in decarbonized energy grids.* Nature Scientific Data, 9, 359. DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
 
 
-### 6. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
+### 5. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
 
 - **Description:** High-fidelity synchrophasor recordings from a real-time Hardware-in-the-Loop (HIL) testbed built on the IEEE 39-bus transmission system with 26 optimally placed PMUs. Integrates RTDS, hardware PMUs, RTAC, and ns-3 network emulation to reproduce realistic grid dynamics including communication delays. Covers generator trips, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded).
 - **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
@@ -111,7 +96,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **Citation:** M. Mustafa Hussain, Purna Kukadiya, Anurag Srivastava, *"High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed for State Estimation and Event Analysis,"* IEEE DataPort, December 2025. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
 
-### 7. ORNL Grid Event Signature Library (GESL) — Transmission Signature Library
+### 6. ORNL Grid Event Signature Library (GESL) — Transmission Signature Library
 
 - **Description:** A large open-source repository of real transmission-level PMU data, developed by ORNL and LLNL under the DOE Office of Electricity. It includes 1,694 labeled transmission events and 2,500+ total PMU and Point-on-Wave signatures collected from U.S. utilities across two interconnections. Events cover generator trips, oscillations, faults, frequency disturbances, and line trips, all anonymized and consistently labeled.
 
@@ -137,7 +122,7 @@ As per project requirements, the datasets below strictly focus on transmission a
   DOI: https://doi.org/10.1109/ACCESS.2024.3404886
 
 
-### 8. IRTSD: IBR-Rich Transmission System Disturbance Dataset
+### 7. IRTSD: IBR-Rich Transmission System Disturbance Dataset
 
 - **Description:** A large-scale open-source electromagnetic transient (EMT) dataset focused on transmission system disturbances in grids with high inverter-based resource (IBR/renewable) penetration (~40% IBR). Developed by Pacific Northwest National Laboratory (PNNL) under the DOE SENTIENT project. Contains 5,500 labeled event cases and ~1.4 million signal recordings covering a wide frequency range (0.5 Hz to 4 kHz), including both commonplace disturbances and emergent IBR-related phenomena not covered by conventional PMU datasets. Addresses a critical gap in the power systems ML community: the lack of publicly available data capturing IBR-specific transmission dynamics.
 - **Download Link:** [IEEE DataPort — IRTSD (Open Access)](https://ieee-dataport.org/open-access/irtsd-open-source-data-and-toolset-electromagnetic-transient-analysis-disturbances-and)
@@ -152,3 +137,17 @@ As per project requirements, the datasets below strictly focus on transmission a
 | 0.0167 | 0.643 | 2.841 | 1.823 | 0.654 | 59.850 | Fault |
 
 - **Citation:** Brett Ross, Kaveri Mahapatra, *"IRTSD: Open-Source Data and Toolset for Electromagnetic Transient Analysis of Disturbances and IBR Control Malfunctions in Transmission Systems,"* IEEE DataPort, December 2024. DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
+
+### 8. VSB Power Line Fault Detection
+* **Description:** Three-phase voltage measurements from medium-voltage overhead lines to detect Partial Discharge (PD), a critical precursor to catastrophic grid failure.
+* **Download Link:** [Kaggle - VSB Power Line Fault Detection](https://www.kaggle.com/c/vsb-power-line-fault-detection/data)
+* **Data Statistics:** High-frequency 20ms duration signals (800,000 measurements per signal). 8,712 total signals. Highly Imbalanced (~95% Normal, ~5% Faults).
+* **What the Data Sample Looks Like:** A `.parquet` file containing continuous numeric arrays mapped to a binary target.
+* **Visual Sample (First 2 Rows):**
+
+| signal_id | phase_0 (V) | phase_1 (V) | phase_2 (V) | target |
+| :--- | :--- | :--- | :--- | :--- |
+| 0 | 18 | -16 | -5 | 0 |
+| 1 | 17 | -17 | -6 | 1 |
+
+- **Citation:** S. Misák, J. Fulnecek, T. Vantuch, T. Buriánek, T. Jezowicz, *"A Complex Classification Approach of Partial Discharges from Covered Conductors in Real Environment,"* IEEE Transactions on Dielectrics and Electrical Insulation, vol. 24, no. 2, pp. 1097–1104, 2017. DOI: [10.1109/TDEI.2017.006135](https://doi.org/10.1109/TDEI.2017.006135)
