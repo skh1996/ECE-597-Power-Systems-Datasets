@@ -131,14 +131,18 @@ As per project requirements, the datasets below strictly focus on transmission a
   DOI: https://doi.org/10.1109/ACCESS.2024.3404886
 
 
-### 8. BPA PMU Line Event Dataset
-* **Description:** Actual transmission line fault signatures (Line-to-Ground, Line-to-Line) captured from the Bonneville Power Administration's (BPA) operational grid PMU data streams, strictly avoiding device-level maintenance data.
-* **Download Link:** [IEEE Xplore (Dataset Repository via Paper)](https://ieeexplore.ieee.org/)
-* **Data Statistics:** High-fidelity 60 Hz PMU recordings from the Pacific Northwest grid. Highly imbalanced to reflect real-world event rarity.
-* **What the Data Sample Looks Like:** Time-series `.csv` logs detailing active/reactive power, voltage, and frequency variations aligned with protective relay logs.
-* **Visual Sample (First 2 Rows):**
+### 8. IRTSD: IBR-Rich Transmission System Disturbance Dataset
 
-| Timestamp_UTC | Substation | V_Mag_kV | Freq_Hz | ROCOF | Relay_Trip |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 14:02:11.000 | SUB_A | 502.1 | 60.002 | 0.001 | 0 |
-| 14:02:11.016 | SUB_A | 415.5 | 59.950 | -0.085 | 1 |
+- **Description:** A large-scale open-source electromagnetic transient (EMT) dataset focused on transmission system disturbances in grids with high inverter-based resource (IBR/renewable) penetration (~40% IBR). Developed by Pacific Northwest National Laboratory (PNNL) under the DOE SENTIENT project. Contains 5,500 labeled event cases and ~1.4 million signal recordings covering a wide frequency range (0.5 Hz to 4 kHz), including both commonplace disturbances and emergent IBR-related phenomena not covered by conventional PMU datasets. Addresses a critical gap in the power systems ML community: the lack of publicly available data capturing IBR-specific transmission dynamics.
+- **Download Link:** [IEEE DataPort — IRTSD (Open Access)](https://ieee-dataport.org/open-access/irtsd-open-source-data-and-toolset-electromagnetic-transient-analysis-disturbances-and)
+- **Data Statistics:** 5,500 labeled event cases across 4 event types: short-circuit faults (180 cases), forced oscillations (576 cases), generator trips (15 cases), and IBR control malfunctions (>4,000 cases). Each case is a `.csv` file (~19–25 MB) with currents, voltages, active/reactive powers, and frequency sampled from detailed PMU models. Total dataset size: ~29.56 GB. PSCAD model files and Python generation scripts also included for reproducibility.
+- **Data Format:** Individual `.csv` files per event (e.g., `SENT_Model_v02_fault_case_1.csv`, `SENT_Model_v02_forc_osc_case_1.csv`, `SENT_Model_v02_gen_trip_case_1.csv`, `SENT_Model_v02_ibr_mc_case_1.csv`), organized by event type and operating condition folder.
+- **What the Data Sample Looks Like:** Each `.csv` file is a time-series table where columns represent labeled signal channels — bus voltages, branch currents, active/reactive power flows, and frequency — sampled at sub-millisecond resolution during the disturbance window.
+- **Visual Sample (Illustrative Schema):**
+
+| Time (s) | V_Bus1 (pu) | I_Branch1 (pu) | P_Branch1 (pu) | Q_Branch1 (pu) | Freq (Hz) | Event_Label |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.0000 | 1.021 | 0.412 | 0.387 | 0.091 | 60.000 | Normal |
+| 0.0167 | 0.643 | 2.841 | 1.823 | 0.654 | 59.850 | Fault |
+
+- **Citation:** Brett Ross, Kaveri Mahapatra, *"IRTSD: Open-Source Data and Toolset for Electromagnetic Transient Analysis of Disturbances and IBR Control Malfunctions in Transmission Systems,"* IEEE DataPort, December 2024. DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
