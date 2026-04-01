@@ -1,4 +1,4 @@
-# High-Fidelity Power Systems Datasets (ECE-597)
+# Power Systems Datasets (ECE-597)
 
 **Author:** Saad Khan | MS in Electrical Engineering, Illinois Institute of Technology  
 **Course:** ECE-597 (Special Problems)  
