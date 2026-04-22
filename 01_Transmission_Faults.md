@@ -87,11 +87,11 @@ As per project requirements, the datasets below strictly focus on transmission a
 ### 2. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
 
 - **Data Type:** Mixed:
-  - ⚠️ Simulated — WECC 179-bus cases (27 cases) and WECC 240-bus cases
+  - Simulated — WECC 179-bus cases (27 cases) and WECC 240-bus cases
     (13 cases) are generated via time-domain simulation using Powertech
     Lab's TSAT software with EPRI's PMU Emulator applied to mimic real
     PMU device behavior including missing samples.
-  - ✅ Real field data — 6 cases of actual oscillatory events recorded
+  - Real field data — 6 cases of actual oscillatory events recorded
     from the ISO New England (ISO-NE) transmission system using field-
     deployed PMUs.
 
