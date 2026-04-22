@@ -214,28 +214,139 @@ measurement channel:
   DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 
-### 4. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
+### 3. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
 
-- **Description:** A first-of-its-kind open-access multi-scale PMU time-series dataset generated through a novel joint Transmission + Distribution (T+D) co-simulation platform (PSS/E 23-bus transmission + two IEEE 13-bus distribution systems via OpenDSS). Contains millisecond-resolution voltage, current, and power measurements across transmission buses during labeled dynamic disturbance events — including short-circuit faults, generator trips, load changes, and natural oscillations. Developed by Texas A&M University, USC, MIT, and Purdue University. Published in *Nature Scientific Data* (2022).
-- **Download Link:** [Zenodo — PSML Dataset (DOI: 10.5281/zenodo.5130612)](https://zenodo.org/record/5130612)
-- **GitHub (Code + Benchmarks):** [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
+- **Data Type:** ⚠️ Simulated — This dataset is generated from a combined transmission and distribution grid simulation using PSS/E and OpenDSS.
+  Although simulated, it is driven by real-world load, weather, and renewable generation data (2018–2020), resulting in physically realistic measurements.
+  All PMU data is synthetic and not collected from real devices.
+
+- **Description:** A multi-scale time-series dataset capturing grid
+  dynamics at both minute-level (steady-state load and renewable
+  profiles) and millisecond-level (transient disturbance events). The
+  T+D co-simulation connects a PSS/E 23-bus transmission system with
+  two IEEE 13-bus distribution systems, exchanging real-time voltage
+  and power data between them at every time step. This joint simulation
+  captures interaction effects between transmission and distribution
+  that conventional transmission-only datasets miss. Developed by
+  Texas A&M University, USC, MIT, and Purdue University and published
+  in Nature Scientific Data (2022).
+
+- **Network/System:**
+  - Transmission: PSS/E 23-bus system (high-voltage bulk grid)
+  - Distribution: Two IEEE 13-bus systems connected to the transmission
+    grid via coupling buses
+  - Load profiles: 66 real U.S. load zones from CAISO, ERCOT, MISO,
+    PJM, NYISO, ISONE — covering 2018–2020
+
+- **Number of PMUs:**
+  - Millisecond-level data: PMU-equivalent measurements at all
+    transmission buses (23 buses) and all distribution nodes
+  - Minute-level data: Node-level voltage and branch power measurements
+    across the full T+D system
+
+- **PMU Placement:** Measurements are collected at every bus in the
+  23-bus transmission system and at every node in both IEEE 13-bus
+  distribution feeders. Full system observability — no partial
+  coverage.
+
+- **Recording Duration & Sampling Resolution:**
+  - Millisecond-level PMU data: Each disturbance scenario captures
+    the full transient event window. Sampled at approximately
+    **960 time steps per scenario** at millisecond resolution.
+  - Minute-level load/renewable data: **3 years** of continuous
+    data (2018–2020) at **1-minute resolution** across 66 U.S.
+    load zones.
+
+- **Network Topology Provided:** Yes:
+  - PSS/E 23-bus transmission model and IEEE 13-bus distribution
+    model are standard benchmark systems widely available in the
+    power systems community
+  - Joint simulation Python code provided in the GitHub repository
+    for full reproducibility
+
+- **Download Link:** [Zenodo — PSML Dataset](https://zenodo.org/record/5130612)
+  > Fully open access — no login required.
+  > Direct download:
+  > `wget https://zenodo.org/record/5130612/files/PSML.zip?download=1`
+  > GitHub (code + benchmarks): [tamu-engineering-research/Open-source-power-dataset](https://github.com/tamu-engineering-research/Open-source-power-dataset)
+
 - **Data Statistics:**
-  - Millisecond-resolution PMU streams: **960 time steps × 91 channels** per scenario (voltage magnitude, voltage phase angle, current magnitude, current phase angle, real power, reactive power, frequency)
-  - Disturbance types: short-circuit faults, generator trips, load disturbances, natural oscillations — each with labeled `info.csv` (start time, end time, location, type)
-  - Minute-resolution load + renewable data: 66 U.S. load zones, 2018–2020 (3 years)
-- **Data Format:** `.csv` files organized per disturbance scenario:
-  - `trans.csv` — Transmission bus voltages and branch power flows (millisecond resolution)
-  - `dist.csv` — Three-phase distribution node voltages (millisecond resolution)
-  - `info.csv` — Disturbance metadata: type, start/end time, source location
-- **What the Data Sample Looks Like:** Each disturbance scenario folder contains three `.csv` files. The transmission file (`trans.csv`) has millisecond timestamps with per-unit voltage at each bus and active/reactive power on each branch.
-- **Visual Sample (Illustrative Schema — `trans.csv`):**
+  - Millisecond-level disturbance events: Multiple forced oscillation
+    and natural oscillation scenarios, each with 960 time steps ×
+    91 measurement channels
+  - Minute-level load/renewable: 66 load zones × 3 years (2018–2020)
+    × 12 fields per zone
+  - License: CC BY 4.0
 
-| Time(s) | VOLT\_151 (pu) | VOLT\_152 (pu) | POWR\_151\_TO\_152 (pu) | VARS\_151\_TO\_152 (pu) | Disturbance\_Type |
-| --- | --- | --- | --- | --- | --- |
-| 0.0000 | 1.023 | 1.019 | 0.412 | 0.087 | Normal |
-| 0.0167 | 0.651 | 0.704 | 1.823 | 0.541 | Short\_Circuit\_Fault |
+---
 
-- **Citation:** Zheng, X., Xu, N., Trinh, L., Wu, D., Huang, T., Sivaranjani, S., Liu, Y., & Xie, L. (2022). *A multi-scale time-series dataset with benchmark for machine learning in decarbonized energy grids.* Nature Scientific Data, 9, 359. DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
+#### Variable Meanings
+
+**Millisecond-level transmission file (`trans.csv`):**
+
+| Field | Physical Meaning |
+|---|---|
+| `Time(s)` | Timestamp at millisecond resolution |
+| `VOLT ###` | Per-unit voltage magnitude at transmission bus `###` — e.g. `VOLT 151` is the voltage at Bus 151 |
+| `POWR ### TO ### CKT #` | Active power (MW) flowing in branch `#` from bus `###` to bus `###` — e.g. `POWR 151 TO 152 CKT 1` |
+| `VARS ### TO ### CKT #` | Reactive power (MVAR) flowing in branch `#` from bus `###` to bus `###` |
+
+**Millisecond-level distribution file (`dist.csv`):**
+
+| Field | Physical Meaning |
+|---|---|
+| `Time(s)` | Timestamp at millisecond resolution |
+| `####.###.#` | Per-unit voltage magnitude of a specific phase at a distribution node. Format: `[T-bus].[D-bus].[phase]` — e.g. `3005.633.1` = phase A voltage at distribution bus 633 which connects to transmission bus 3005 |
+
+**Disturbance metadata file (`info.csv`):**
+
+| Field | Physical Meaning |
+|---|---|
+| Start time | When the disturbance begins in the simulation (seconds) |
+| End time | When the disturbance ends (seconds) |
+| Location | Which bus or generator is the source of the disturbance |
+| Type | Category of the disturbance event (see Event Labels below) |
+
+**Minute-level load/renewable file (`ISO_zone_#.csv`):**
+
+| Field | Physical Meaning |
+|---|---|
+| `time` | Timestamp at 1-minute resolution |
+| `load_power` | Normalized total load power consumed in that zone |
+| `wind_power` | Normalized wind turbine generation output |
+| `solar_power` | Normalized solar PV generation output |
+| `DHI` | Diffuse horizontal irradiance — scattered sunlight (W/m²) |
+| `DNI` | Direct normal irradiance — direct sunlight (W/m²) |
+| `GHI` | Global horizontal irradiance — total sunlight on a flat surface (W/m²) |
+| `Dew Point` | Dew point temperature (°C) — affects humidity and solar panel efficiency |
+| `Solar Zenith Angle` | Angle between sun's rays and vertical — determines solar panel output (degrees) |
+| `Wind Speed` | Wind speed (m/s) — determines wind turbine output |
+| `Relative Humidity` | Relative humidity (%) |
+| `Temperature` | Ambient temperature (°C) |
+
+---
+
+#### Event Labels
+
+| Label | Meaning | Location in Data |
+|---|---|---|
+| `Forced Oscillation` | An external periodic signal is injected at a specific bus or generator causing sustained grid-wide power swings. Source bus/generator recorded in `info.csv`. | `Millisecond/Forced_Oscillation/row_#/info.csv` |
+| `Natural Oscillation` | The grid's internal electromechanical modes become underdamped and begin oscillating without external forcing. Source mode and location recorded in `info.csv`. | `Millisecond/Natural_Oscillation/row_#/info.csv` |
+
+---
+
+- **Visual Sample (`trans.csv` — Millisecond-level):**
+
+| Time(s) | VOLT 151 (pu) | VOLT 152 (pu) | POWR 151 TO 152 CKT 1 | VARS 151 TO 152 CKT 1 |
+|---|---|---|---|---|
+| 0.0000 | 1.023 | 1.019 | 0.412 | 0.087 |
+| 0.0167 | 0.651 | 0.704 | 1.823 | 0.541 |
+
+- **Citation:** Zheng, X., Xu, N., Trinh, L., Wu, D., Huang, T.,
+  Sivaranjani, S., Liu, Y., & Xie, L. (2022). *A multi-scale
+  time-series dataset with benchmark for machine learning in
+  decarbonized energy grids.* Nature Scientific Data, 9, 359.
+  DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
 
 
 ### 5. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
