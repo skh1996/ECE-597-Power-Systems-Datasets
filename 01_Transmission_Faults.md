@@ -8,18 +8,82 @@ As per project requirements, the datasets below strictly focus on transmission a
 ---
 
 ### 1. UCI Electrical Grid Stability
-* **Description:** A mathematically rigorous simulated dataset representing a 4-node star architecture grid, predicting system stability after control disturbances.
-* **Download Link:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/471/electrical+grid+stability+simulated+data)
-* **Data Statistics:** 60,000 instances total. 12 input features and 1 predictive target.
-* **What the Data Sample Looks Like:** A standard `.csv` file detailing reaction times (`tau`), power balance (`p`), and the categorical stability label (`stabf`).
-* **Visual Sample (First 2 Rows):**
 
-| tau1 | tau2 | p1 | p2 | g1 | stabf |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 2.959 | 3.079 | 3.763 | -1.221 | 0.650 | unstable |
-| 9.304 | 4.902 | 2.009 | -1.469 | 0.859 | stable |
+- **Data Type:** ⚠️ Simulated — generated via mathematical modeling of the 
+  Decentral Smart Grid Control (DSGC) differential equation system. 
+  No real grid hardware was used.
+- **Description:** A simulated dataset representing a 4-node star-topology 
+  grid with one electricity supplier and three consumers. The DSGC system 
+  links electricity price directly to grid frequency, allowing participants 
+  to adjust consumption in response to price signals. Each instance 
+  represents one simulation run with randomized input conditions, and the 
+  output records whether the grid remained stable or collapsed under those 
+  conditions. Useful as a foundational benchmark for binary grid stability 
+  classification.
+- **Network/System:** 4-node star topology — 1 supplier node (Node 1) + 
+  3 consumer nodes (Nodes 2, 3, 4). Not based on a standard IEEE test case.
+- **Number of PMUs:** N/A — this is a simulation dataset. No physical PMU 
+  hardware was used. Variables represent node-level electrical quantities 
+  derived from the DSGC mathematical model.
+- **Recording Duration:** N/A — each row is one independent simulation instance, not a time-series recording.
+- **Sampling Resolution:** N/A — static snapshot per simulation run.
+- **Download Link:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/471/electrical+grid+stability+simulated+data)
+- **Data Statistics:** 60,000 simulation instances. 12 input features, 
+  1 continuous target (`stab`), 1 categorical target (`stabf`). 
+  Class distribution: ~36% stable, ~64% unstable.
 
-- **Citation:** V. Arzamasov, K. Böhm, P. Jochem, *"Towards Concise Models of Grid Stability,"* 2018 IEEE International Conference on Communications, Control, and Computing Technologies for Smart Grids (SmartGridComm), Aalborg, 2018, pp. 1–6. DOI: [10.1109/SmartGridComm.2018.8587498](https://doi.org/10.1109/SmartGridComm.2018.8587498)
+---
+
+#### Variable Meanings
+
+| Variable | Type | Physical Meaning | Range |
+|---|---|---|---|
+| `tau1` | Input | Reaction time of the **supplier** node — how quickly the electricity producer responds to price changes (seconds) | 0.5 – 10 s |
+| `tau2` | Input | Reaction time of **consumer node 2** — how quickly this consumer adjusts usage in response to price | 0.5 – 10 s |
+| `tau3` | Input | Reaction time of **consumer node 3** | 0.5 – 10 s |
+| `tau4` | Input | Reaction time of **consumer node 4** | 0.5 – 10 s |
+| `p1` | Input | Net power at the **supplier node** — always positive (generating). Derived as p1 = −(p2+p3+p4) to maintain power balance | 1.5 – 6.0 |
+| `p2` | Input | Net power at **consumer node 2** — always negative (consuming) | −2.0 – −0.5 |
+| `p3` | Input | Net power at **consumer node 3** — always negative (consuming) | −2.0 – −0.5 |
+| `p4` | Input | Net power at **consumer node 4** — always negative (consuming) | −2.0 – −0.5 |
+| `g1` | Input | Price elasticity coefficient (gamma) of the **supplier** — how sensitive the producer is to electricity price changes | 0.05 – 1.00 |
+| `g2` | Input | Price elasticity coefficient of **consumer node 2** | 0.05 – 1.00 |
+| `g3` | Input | Price elasticity coefficient of **consumer node 3** | 0.05 – 1.00 |
+| `g4` | Input | Price elasticity coefficient of **consumer node 4** | 0.05 – 1.00 |
+| `stab` | Target (continuous) | Maximum real part of the characteristic equation root. **If positive → system is linearly unstable. If negative → system is stable.** | Real number |
+| `stabf` | Target (categorical) | Binary stability label derived directly from `stab` (`stabf = stable` if `stab ≤ 0`, else `unstable`). This is the primary classification target. | `stable` / `unstable` |
+
+> **Note:** `p1` is a non-predictive feature — it is fully determined by 
+> the other three power values (p1 = −(p2+p3+p4)) and should be excluded 
+> from model training. `stab` and `stabf` are directly related — use only 
+> `stabf` for classification tasks.
+
+---
+
+#### Event Labels
+
+| Label | Meaning | Count (approx.) |
+|---|---|---|
+| `stable` | Grid remains balanced — frequency deviation is controlled and the system does not collapse | ~21,600 (36%) |
+| `unstable` | Grid becomes unbalanced — the frequency deviation grows and the system would collapse without intervention | ~38,400 (64%) |
+
+---
+
+- **Topology Provided:** Partially — the 4-node star architecture is 
+  described in the original paper. No standard IEEE bus model files are 
+  provided since this is a custom mathematical model.
+- **Visual Sample (First 2 Rows):**
+
+| tau1 | tau2 | p1 | p2 | g1 | stab | stabf |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2.959 | 3.079 | 3.763 | −1.221 | 0.650 | 0.055 | unstable |
+| 9.304 | 4.902 | 2.009 | −1.469 | 0.859 | −0.137 | stable |
+
+- **Citation:** V. Arzamasov, K. Böhm, P. Jochem, *"Towards Concise Models 
+  of Grid Stability,"* 2018 IEEE International Conference on Communications, 
+  Control, and Computing Technologies for Smart Grids (SmartGridComm), 
+  Aalborg, 2018, pp. 1–6. 
+  DOI: [10.1109/SmartGridComm.2018.8587498](https://doi.org/10.1109/SmartGridComm.2018.8587498)
 
 
 ### 2. EPFL Campus Grid PMU Data
