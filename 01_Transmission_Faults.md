@@ -9,7 +9,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 
 ### 1. UCI Electrical Grid Stability
 
-- **Data Type:** ⚠️ Simulated —> generated via mathematical modeling of the
+- **Data Type:** Simulated —> generated via mathematical modeling of the
   Decentral Smart Grid Control (DSGC) differential equation system.
   No real grid hardware was used.
 
