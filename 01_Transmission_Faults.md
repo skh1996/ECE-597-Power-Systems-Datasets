@@ -99,7 +99,7 @@ As per project requirements, the datasets below strictly focus on transmission a
   and testing algorithms that locate the source of power system
   oscillations. Power system oscillations occur when generators or loads
   inject a periodic disturbance into the grid causing voltage, current,
-  and power to swing back and forth at a sustained frequency — if
+  and power to swing back and forth at a sustained frequency, if
   undetected this can damage equipment or cause cascading failures.
   The library provides labeled cases where the oscillation source location
   is known, so researchers can train and validate their detection
@@ -109,7 +109,7 @@ As per project requirements, the datasets below strictly focus on transmission a
 - **What "Locating" the Oscillation Means:** Each case provides PMU
   measurements from multiple buses across the grid. The task is to
   identify **which specific generator, load, or bus is the source**
-  injecting the periodic disturbance — not just that an oscillation
+  injecting the periodic disturbance, not just that an oscillation
   exists, but pinpointing its origin. The answer (ground truth label)
   for each simulated case is documented in the case description file.
 
@@ -156,7 +156,7 @@ As per project requirements, the datasets below strictly focus on transmission a
   - 14-bus: MATLAB model files included
 
 - **Download Link:** [IEEE DataPort — Test Cases Library on Forced/Sustained Power System Oscillations](https://ieee-dataport.org/documents/test-cases-library-forcedsustained-power-system-oscillations)
-  > ⚠️ Free IEEE account required to access dataset files.
+  > Note: Free IEEE account required to access dataset files.
   > DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 - **Data Statistics:**
