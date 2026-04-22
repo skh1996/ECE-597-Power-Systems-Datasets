@@ -296,7 +296,7 @@ measurement channel:
 | Field | Physical Meaning |
 |---|---|
 | `Time(s)` | Timestamp at millisecond resolution |
-| `####.###.#` | Per-unit voltage magnitude of a specific phase at a distribution node. Format: `[T-bus].[D-bus].[phase]` — e.g. `3005.633.1` = phase A voltage at distribution bus 633 which connects to transmission bus 3005 |
+| `####.###.#` | Per-unit voltage magnitude of a specific phase at a distribution node. Format: `[T-bus].[D-bus].[phase]` — e.g. `3005.633.1` = phase A voltage at distribution bus 633 connected to transmission bus 3005 |
 
 **Disturbance metadata file (`info.csv`):**
 
@@ -306,26 +306,6 @@ measurement channel:
 | End time | When the disturbance ends (seconds) |
 | Location | Which bus or generator is the source of the disturbance |
 | Type | Category of the disturbance event (see Event Labels below) |
-
-**Minute-level load/renewable file (`ISO_zone_#.csv`):**
-
-| Field | Physical Meaning |
-|---|---|
-| `time` | Timestamp at 1-minute resolution |
-| `load_power` | Normalized total load power consumed in that zone |
-| `wind_power` | Normalized wind turbine generation output |
-| `solar_power` | Normalized solar PV generation output |
-| `DHI` | Diffuse horizontal irradiance — scattered sunlight (W/m²) |
-| `DNI` | Direct normal irradiance — direct sunlight (W/m²) |
-| `GHI` | Global horizontal irradiance — total sunlight on a flat surface (W/m²) |
-| `Dew Point` | Dew point temperature (°C) — affects humidity and solar panel efficiency |
-| `Solar Zenith Angle` | Angle between sun's rays and vertical — determines solar panel output (degrees) |
-| `Wind Speed` | Wind speed (m/s) — determines wind turbine output |
-| `Relative Humidity` | Relative humidity (%) |
-| `Temperature` | Ambient temperature (°C) |
-
----
-
 #### Event Labels
 
 | Label | Meaning | Location in Data |
