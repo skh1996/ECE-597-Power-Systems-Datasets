@@ -83,36 +83,135 @@ As per project requirements, the datasets below strictly focus on transmission a
   DOI: [10.1109/SmartGridComm.2018.8587498](https://doi.org/10.1109/SmartGridComm.2018.8587498)
 
 
-### 2. EPFL Campus Grid PMU Data
-* **Description:** Real-world Phasor Measurement Unit (PMU) data collected from a live university campus grid in Switzerland during normal and anomalous operations.
-* **Download Link:** [EPFL Infoscience Repository](https://github.com/DESL-EPFL/Point-on-wave-Data-of-EPFL-campus-Distribution-Network/tree/master)
-* **Data Statistics:** Standard European Grid Frequency (50 Hz). Multi-day continuous logging. 
-* **What the Data Sample Looks Like:** Time-series `.csv` files containing high-resolution synchrophasor measurements.
-* **Visual Sample (First 2 Rows):**
 
-| Timestamp | Voltage_Mag_kV | Phase_Angle_rad | Frequency_Hz | ROCOF |
-| :--- | :--- | :--- | :--- | :--- |
-| 1459451121.00 | 20.124 | 0.451 | 49.981 | -0.012 |
-| 1459451121.02 | 20.122 | 0.453 | 49.978 | -0.015 |
+### 2. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
 
-- **Citation:** M. Pignati, L. Zanni, P. Romano, R. Cherkaoui, M. Paolone, *"Real-Time State Estimation of the EPFL-Campus Medium-Voltage Grid by Using PMUs,"* IEEE PES Innovative Smart Grid Technologies Conference (ISGT), Washington DC, 2015. DOI: [10.1109/ISGT.2015.7131877](https://doi.org/10.1109/ISGT.2015.7131877)
+- **Data Type:** Mixed:
+  - ⚠️ Simulated — WECC 179-bus cases (27 cases) and WECC 240-bus cases
+    (13 cases) are generated via time-domain simulation using Powertech
+    Lab's TSAT software with EPRI's PMU Emulator applied to mimic real
+    PMU device behavior including missing samples.
+  - ✅ Real field data — 6 cases of actual oscillatory events recorded
+    from the ISO New England (ISO-NE) transmission system using field-
+    deployed PMUs.
 
+- **Description:** A benchmark library created specifically for developing
+  and testing algorithms that locate the source of power system
+  oscillations. Power system oscillations occur when generators or loads
+  inject a periodic disturbance into the grid causing voltage, current,
+  and power to swing back and forth at a sustained frequency — if
+  undetected this can damage equipment or cause cascading failures.
+  The library provides labeled cases where the oscillation source location
+  is known, so researchers can train and validate their detection
+  algorithms against a ground truth. Used as the official dataset for
+  the 2021 IEEE-NASPI Oscillation Source Location Contest.
 
-### 3. IEEE Test Cases Library — Forced/Sustained Power System Oscillations
+- **What "Locating" the Oscillation Means:** Each case provides PMU
+  measurements from multiple buses across the grid. The task is to
+  identify **which specific generator, load, or bus is the source**
+  injecting the periodic disturbance — not just that an oscillation
+  exists, but pinpointing its origin. The answer (ground truth label)
+  for each simulated case is documented in the case description file.
 
-- **Description:** A comprehensive benchmark library of PMU and Point-on-Wave (PoW) data for power system oscillation source location. Includes simulated forced and natural mode oscillation cases on the WECC 179-bus and WECC 240-bus systems, 6 actual oscillatory event recordings from ISO New England, and a new PoW dataset on a 14-bus inverter-based system. Developed by ISO New England and the University of Tennessee, Knoxville, and used as the official dataset for the 2021 IEEE-NASPI Oscillation Source Location Contest.
+- **Network/System:**
+  - Sub-dataset 1: WECC 179-bus transmission system (simplified Western
+    US grid model, PSS/E V30 format)
+  - Sub-dataset 2: WECC 240-bus transmission system (NREL reduced model,
+    243 buses, 146 generating units at 56 plants)
+  - Sub-dataset 3: ISO New England actual transmission system
+    (topology partially provided via PDF map)
+  - Sub-dataset 4: 14-bus inverter-based system (GFL and GFM inverter
+    models, PoW data only)
+
+- **Number of PMUs:**
+  - WECC 179-bus: PMUs at all generator buses and major transmission
+    buses — full system observability
+  - WECC 240-bus: Partial observability — PMUs at a subset of buses
+    and branches (monitored locations listed in provided XLSX file)
+  - ISO-NE: Multiple field PMUs across the New England transmission
+    system (locations shown in provided PDF map)
+
+- **PMU Placement:** Topology and monitoring files provided with each
+  case. For WECC 240-bus, the file `Monitored_buses&branches.xlsx`
+  lists all monitored buses and branches. For ISO-NE, a PDF map of
+  measurement locations is included per case.
+
+- **Recording Duration & Sampling Resolution:**
+  - WECC 179-bus: Variable per case — typically several minutes of
+    simulation capturing the onset and sustained period of oscillation.
+    Sampled at **30 Hz** (30 samples per second).
+  - WECC 240-bus: **90 seconds** per case — 30 seconds pre-event
+    window + 60 seconds post-event window. Sampled at **30 Hz**.
+  - ISO-NE real cases: Duration varies per event — field recordings
+    capturing actual oscillation onset and decay.
+  - 14-bus PoW: Sub-cycle resolution waveform data (higher than PMU
+    rate) stored as MATLAB `.mat` files.
+
+- **Network Topology Provided:** Yes — for all sub-datasets:
+  - WECC 179-bus: `.raw` (power flow) and `.dyr` (dynamic data) model
+    files compatible with PSS/E V30
+  - WECC 240-bus: Full TSAT model files (`.pfb`, `.dyr`, `.tudm` etc.)
+    developed by NREL
+  - ISO-NE: PDF map of measurement locations per case
+  - 14-bus: MATLAB model files included
+
 - **Download Link:** [IEEE DataPort — Test Cases Library on Forced/Sustained Power System Oscillations](https://ieee-dataport.org/documents/test-cases-library-forcedsustained-power-system-oscillations)
-- **Data Statistics:** PMU data sampled at 30 Hz (WECC 179-bus: 18 forced oscillation + 9 natural mode cases; WECC 240-bus: 13 forced oscillation cases; ISO New England: 6 real-world events). PoW data on a 14-bus system: 6 forced + 5 natural mode cases. Total download size: ~540 MB across four archives.
-- **Data Formats:** `.txt` and `.csv` for PMU data; `.mat` for PoW data; simulation model files in `.raw`, `.dyr`, `.pfb`, `.dat` formats (compatible with Powertech DSATools/TSAT and PSS/E).
-- **What the Data Sample Looks Like:** Each PMU case folder contains separate `.txt` files for bus voltage magnitudes (`BusVolMag`), bus voltage angles (`BusVolAng`), line current magnitudes (`LinCurMag`), and line current angles (`LinCurAng`), plus rotor speed and angle for generator buses. ISO-NE real-world cases are provided as `.csv` files.
-- **Visual Sample (Illustrative Schema):**
+  > ⚠️ Free IEEE account required to access dataset files.
+  > DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
-| Time_s | BusVolMag (pu) | BusVolAng (deg) | LinCurMag (pu) | LinCurAng (deg) | RotorSpd (pu) |
-| --- | --- | --- | --- | --- | --- |
-| 0.000 | 1.024 | -14.82 | 0.412 | -22.10 | 1.000 |
-| 0.033 | 1.021 | -15.10 | 0.431 | -23.40 | 0.999 |
+- **Data Statistics:**
 
-- **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez, *"Test Cases Library on Forced/Sustained Power System Oscillations"*, IEEE DataPort, 2025. DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
+| Sub-dataset | Type | Cases | Buses | Sampling |
+|---|---|---|---|---|
+| WECC 179-bus | Simulated | 18 forced oscillation + 9 natural mode = 27 cases | 179 | 30 Hz |
+| WECC 240-bus | Simulated | 13 forced oscillation cases | 240 | 30 Hz |
+| ISO New England | Real field data | 6 actual oscillation events | Real US grid | Field PMU rate |
+| 14-bus PoW | Simulated | 6 forced + 5 natural mode = 11 cases | 14 | Sub-cycle (PoW) |
+
+---
+
+#### Variable Meanings (PMU data files)
+
+Each PMU case folder contains separate `.txt` files, one per
+measurement channel:
+
+| File / Field | Physical Meaning |
+|---|---|
+| `BusVolMag.txt` | Bus voltage magnitude in per-unit (pu) at each monitored bus — how strong the voltage is relative to the nominal value |
+| `BusVolAng.txt` | Bus voltage phase angle in degrees — the timing offset of the voltage waveform at each bus relative to a reference |
+| `LinCurMag.txt` | Line current magnitude in pu — how much current is flowing through each monitored transmission line |
+| `LinCurAng.txt` | Line current phase angle in degrees — timing offset of the current waveform on each line |
+| `RotorAng.txt` | Generator rotor angle in degrees — angular position of the generator rotor relative to a reference, indicates generator swing behavior during oscillation |
+| `RotorSpd.txt` | Generator rotor speed in pu — deviation of generator speed from nominal (1.0 pu = synchronous speed). Values above or below 1.0 indicate the generator is oscillating. |
+
+---
+
+#### Event Labels
+
+| Label | Meaning | Cases |
+|---|---|---|
+| Forced Oscillation (FO) | A periodic external disturbance is injected at a specific generator, load, or HVDC device causing the whole grid to oscillate. The source location is the labeled ground truth. | 18 (WECC 179) + 13 (WECC 240) + 6 (WECC 14-bus PoW) |
+| Natural Mode Oscillation (ND) | The grid's own internal electromechanical modes become poorly damped and start oscillating without any external forcing. Source is the weakly damped mode location. | 9 (WECC 179) + 5 (WECC 14-bus PoW) |
+| Actual Oscillation Event | Real oscillation events recorded from the ISO New England grid. Source location identified and verified by ISO-NE engineers. | 6 (ISO-NE field data) |
+
+> The ground truth source location for each case is documented in
+> `Description.txt` inside each case folder. The modeling task is
+> source localization — given the PMU time-series, predict which
+> bus or generator ID is the oscillation source..
+
+---
+
+- **Visual Sample (Illustrative Schema — `BusVolMag.txt`):**
+
+| Time_s | Bus_4 (pu) | Bus_79 (pu) | Bus_118 (pu) | Bus_151 (pu) |
+|---|---|---|---|---|
+| 0.000 | 1.023 | 1.018 | 1.031 | 1.009 |
+| 0.033 | 1.021 | 1.015 | 1.029 | 1.006 |
+
+- **Citation:** Bin Wang, Slava Maslennikov, Kai Sun, Pablo Gill Estevez,
+  *"Test Cases Library on Forced/Sustained Power System Oscillations,"*
+  IEEE DataPort, 2025.
+  DOI: [10.21227/a6hg-n822](https://dx.doi.org/10.21227/a6hg-n822)
 
 
 ### 4. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
