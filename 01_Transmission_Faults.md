@@ -571,21 +571,129 @@ and provider, but the standard PMU fields are:
   DOI: [10.1109/ACCESS.2024.3404886](https://doi.org/10.1109/ACCESS.2024.3404886)
 
 
-### 7. IRTSD: IBR-Rich Transmission System Disturbance Dataset
+### 6. IRTSD: IBR-Rich Transmission System Disturbance Dataset
 
-- **Description:** A large-scale open-source electromagnetic transient (EMT) dataset focused on transmission system disturbances in grids with high inverter-based resource (IBR/renewable) penetration (~40% IBR). Developed by Pacific Northwest National Laboratory (PNNL) under the DOE SENTIENT project. Contains 5,500 labeled event cases and ~1.4 million signal recordings covering a wide frequency range (0.5 Hz to 4 kHz), including both commonplace disturbances and emergent IBR-related phenomena not covered by conventional PMU datasets. Addresses a critical gap in the power systems ML community: the lack of publicly available data capturing IBR-specific transmission dynamics.
+- **Data Type:** ⚠️ Simulated — generated using PSCAD electromagnetic
+  transient (EMT) software. This is synthetic data from simulation
+  results. The PSCAD model is intentionally small in topology but
+  uses very detailed representations of IBR controls, traditional
+  generator controls, and PMU models — providing high-fidelity
+  representation of protection and control phenomena from 0.5 Hz
+  to 4 kHz. The full PSCAD model and Python generation scripts are
+  included with the dataset for full reproducibility.
+
+- **Description:** A large-scale open-source EMT dataset focused on
+  transmission system disturbances in grids with high inverter-based
+  resource (IBR/renewable) penetration (~40% IBR). Developed by
+  Pacific Northwest National Laboratory (PNNL) under the DOE
+  SENTIENT project. Contains 5,500 labeled event cases covering
+  both commonplace disturbances (e.g., voltage control steps,
+  generator trips, short-circuit faults) and emergent IBR-specific
+  phenomena (e.g., forced oscillations from improper IBR controller
+  tuning, unexpected momentary cessation at an IBR plant). The
+  dataset directly addresses a critical gap — the lack of publicly
+  available high-fidelity data capturing IBR-specific transmission
+  dynamics, which are becoming increasingly relevant as grids
+  integrate more renewable energy.
+
+- **Network/System:** Custom PSCAD transmission system model with
+  ~40% IBR penetration based on the Enhanced IEEE 39-bus system
+  with Inverter-Based Resources (IBR models originally developed
+  by Maharjan et al., available at:
+  https://github.com/pnnltestsystem/Enhanced-IEEE-39-Bus-System-with-Inverter-based-Resources-on-Multi-Time-Scale-Platforms).
+  Relatively small topologically but with very detailed IBR and
+  generator control models.
+
+- **Number of PMUs:** Detailed PMU models are embedded in the PSCAD
+  simulation at key buses throughout the transmission system. The
+  PMU models can also function as protective relays, providing
+  current, voltage, power, and frequency measurements simultaneously.
+
+- **PMU Placement:** PMUs placed at transmission buses across the
+  IBR-rich system. Full placement details and bus configuration are
+  documented in `README_SENT_V02_Dataset.docx` available in the
+  Documentation section of the dataset page.
+
+- **Recording Duration & Sampling Resolution:** Each event case is
+  one `.csv` file capturing the full transient window. File sizes
+  are ~19–25 MB per case at sub-millisecond resolution — the EMT
+  simulation captures phenomena from 0.5 Hz to 4 kHz, far exceeding
+  the resolution of conventional PMU datasets (typically 30–60 Hz).
+
+- **Network Topology Provided:** Yes — full PSCAD model files
+  (`.pscx`) are included in the download under `PSCAD Model files
+  (15.57 MB)`. Python automation scripts (`.py`) for generating
+  additional cases are also provided. Detailed instructions in
+  `README_SENT_V02_Dataset.docx`.
+
 - **Download Link:** [IEEE DataPort — IRTSD (Open Access)](https://ieee-dataport.org/open-access/irtsd-open-source-data-and-toolset-electromagnetic-transient-analysis-disturbances-and)
-- **Data Statistics:** 5,500 labeled event cases across 4 event types: short-circuit faults (180 cases), forced oscillations (576 cases), generator trips (15 cases), and IBR control malfunctions (>4,000 cases). Each case is a `.csv` file (~19–25 MB) with currents, voltages, active/reactive powers, and frequency sampled from detailed PMU models. Total dataset size: ~29.56 GB. PSCAD model files and Python generation scripts also included for reproducibility.
-- **Data Format:** Individual `.csv` files per event (e.g., `SENT_Model_v02_fault_case_1.csv`, `SENT_Model_v02_forc_osc_case_1.csv`, `SENT_Model_v02_gen_trip_case_1.csv`, `SENT_Model_v02_ibr_mc_case_1.csv`), organized by event type and operating condition folder.
-- **What the Data Sample Looks Like:** Each `.csv` file is a time-series table where columns represent labeled signal channels — bus voltages, branch currents, active/reactive power flows, and frequency — sampled at sub-millisecond resolution during the disturbance window.
+  > Open Access — free IEEE account required.
+  > DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
+  > Total size: ~29.56 GB (Event Data) + 15.57 MB (PSCAD model)
+
+- **Data Statistics:**
+
+| Event Type | File Naming Convention | Cases | File Size |
+|---|---|---|---|
+| Short-circuit faults | `SENT_Model_v02_fault_case_#.csv` | 180 | ~19 MB each |
+| Forced oscillations | `SENT_Model_v02_forc_osc_case_#.csv` | 576 | ~19–20 MB each |
+| Generator trips | `SENT_Model_v02_gen_trip_case_#.csv` | 15 | ~19 MB each |
+| IBR control malfunctions | `SENT_Model_v02_ibr_mc_case_#.csv` | >4,700 | ~25 MB each |
+| **Total** | | **~5,500** | **~29.56 GB** |
+
+  - Operating conditions folder: `IBRs, Heavy Imports` (additional
+    folders for other operating conditions included in full download)
+  - License: CC BY 4.0
+
+---
+
+#### Variable Meanings
+
+Each `.csv` event file contains time-series columns representing
+currents, voltages, powers, and frequencies measured by the
+embedded PMU models at transmission buses:
+
+| Field | Physical Meaning |
+|---|---|
+| `Time` | Simulation timestamp at sub-millisecond resolution (seconds) |
+| `V_Bus_#` | Per-unit voltage magnitude at transmission bus `#` — how strong the voltage is at that bus relative to nominal |
+| `I_Branch_#` | Per-unit current magnitude flowing through transmission branch `#` |
+| `P_Branch_#` | Active power (MW) flowing through branch `#` — the real component of power transfer |
+| `Q_Branch_#` | Reactive power (MVAR) flowing through branch `#` — the imaginary component related to voltage support |
+| `Freq_Hz` | Instantaneous grid frequency in Hz — deviations from 60 Hz indicate generation-load imbalance |
+| `IBR_Status` | Operational status of IBR plant — indicates normal operation, momentary cessation, or control malfunction |
+| `Event_Label` | Event type label for this case (see Event Labels below) |
+
+> **Note:** Exact column names are documented in
+> `README_SENT_V02_Dataset.docx` available on the dataset page.
+> Column naming follows PSCAD output conventions for bus and
+> branch identifiers.
+
+---
+
+#### Event Labels
+
+| Label | Meaning | Cases |
+|---|---|---|
+| `Fault` | Short-circuit fault at a transmission bus or line — causes sudden large voltage drop and current surge | 180 |
+| `Forced_Oscillation` | Periodic disturbance injected by a malfunctioning IBR controller or traditional generator causing sustained grid-wide power swings | 576 |
+| `Generator_Trip` | Sudden disconnection of a synchronous generator causing frequency drop and power redistribution | 15 |
+| `IBR_Malfunction` | Unexpected IBR control behavior — includes momentary cessation (IBR suddenly stops injecting current), erroneous reactive power injection, or improper controller response to grid events | >4,700 |
+
+---
+
 - **Visual Sample (Illustrative Schema):**
 
 | Time (s) | V_Bus1 (pu) | I_Branch1 (pu) | P_Branch1 (pu) | Q_Branch1 (pu) | Freq (Hz) | Event_Label |
-| --- | --- | --- | --- | --- | --- | --- |
+|---|---|---|---|---|---|---|
 | 0.0000 | 1.021 | 0.412 | 0.387 | 0.091 | 60.000 | Normal |
 | 0.0167 | 0.643 | 2.841 | 1.823 | 0.654 | 59.850 | Fault |
 
-- **Citation:** Brett Ross, Kaveri Mahapatra, *"IRTSD: Open-Source Data and Toolset for Electromagnetic Transient Analysis of Disturbances and IBR Control Malfunctions in Transmission Systems,"* IEEE DataPort, December 2024. DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
+- **Citation:** Brett Ross, Kaveri Mahapatra, *"IRTSD: Open-Source
+  Data and Toolset for Electromagnetic Transient Analysis of
+  Disturbances and IBR Control Malfunctions in Transmission
+  Systems,"* IEEE DataPort, December 2024.
+  DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
 
 ### 8. VSB Power Line Fault Detection
 * **Description:** Three-phase voltage measurements from medium-voltage overhead lines to detect Partial Discharge (PD), a critical precursor to catastrophic grid failure.
