@@ -444,30 +444,131 @@ at that PMU's bus location:
   December 2025.
   DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
-### 6. ORNL Grid Event Signature Library (GESL) — Transmission Signature Library
+### 5. ORNL Grid Event Signature Library (GESL)
 
-- **Description:** A large open-source repository of real transmission-level PMU data, developed by ORNL and LLNL under the DOE Office of Electricity. It includes 1,694 labeled transmission events and 2,500+ total PMU and Point-on-Wave signatures collected from U.S. utilities across two interconnections. Events cover generator trips, oscillations, faults, frequency disturbances, and line trips, all anonymized and consistently labeled.
+- **Data Type:** ✅ Real field data — signatures are collected directly
+  from operational U.S. electric utility grids. All data providers are
+  anonymized to enable open sharing while protecting grid security and
+  utility confidentiality.
+
+- **Description:** The largest open-access repository of real
+  transmission-level power grid event signatures, developed jointly
+  by Oak Ridge National Laboratory (ORNL), Lawrence Livermore National
+  Laboratory (LLNL), and Pacific Northwest National Laboratory (PNNL)
+  under the U.S. DOE Office of Electricity. The library collects,
+  labels, and standardizes PMU and Point-on-Wave (PoW) recordings from
+  multiple U.S. utility providers into a single searchable platform.
+  All events are labeled using a uniform three-level taxonomy
+  (Group → Class → Subclass) applied consistently across all data
+  sources. Designed to serve as a go-to benchmark resource for grid
+  event detection and AI/ML algorithm development and validation.
+
+- **Network/System:** Real operational U.S. transmission and
+  distribution grids contributed by multiple anonymous utility
+  providers across two interconnections (Eastern and Western). No
+  single standard IEEE test case — data represents diverse real
+  grid topologies and configurations.
+
+- **Number of PMUs:** 2,191 PMU signatures and 443 PoW signatures
+  in the library as of the latest published count, sourced from
+  approximately 500 unique PMUs across the United States contributed
+  by multiple utility providers.
+
+- **PMU Placement:** Field-deployed PMUs at real transmission
+  substations and distribution nodes across the U.S. grid. Exact
+  locations are anonymized — each event record includes a PDF map
+  or metadata file indicating the general measurement location
+  within the anonymized grid topology.
+
+- **Recording Duration & Sampling Resolution:** Varies per event
+  and sensor type:
+  - PMU data: typically 30–60 Hz reporting rate (30–60 samples
+    per second), capturing event windows from seconds to minutes
+  - PoW data: sub-cycle resolution (higher than PMU rate),
+    capturing fast transients at microsecond-level detail
+  - Each downloaded signature includes the full event window
+    with pre-event baseline and post-event recovery period
+
+- **Network Topology Provided:** ⚠️ Partially — topology is
+  anonymized to protect utility confidentiality. Each event record
+  includes a description of the measurement context (transmission
+  level vs. distribution level, voltage class, sensor type) but
+  not the full grid model.
 
 - **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gesl.ornl.gov)
-  > Note: Free account required. Data accessible via web Dashboard or Python API. 
-  
-- **Data Statistics:**  
-  1,694 unique labeled transmission PMU events. PMU data at 30–60 Hz reporting rate; PoW data at higher resolution. Data spans two U.S. interconnections, multiple utility providers, and diverse instrument configurations. Uniform event taxonomy applied across Primary, Class, and Sub-Class label levels.
+  > ⚠️ Free account required (valid email only, no institutional
+  > affiliation needed). Once logged in:
+  > 1. Click **Signature Dashboard**
+  > 2. Filter by event type, sensor type, voltage level, or date
+  > 3. Preview waveform plot before downloading
+  > 4. Download individual event records as `.csv` files
+  > A Python API is also available for programmatic bulk access.
 
-- **What the Data Sample Looks Like:**  
-  Each event record is a `.csv` file containing time-series synchrophasor measurements (voltage magnitude, voltage angle, current magnitude, current angle, frequency, ROCOF) from one or more PMUs, along with an event tag and metadata file.
+- **Data Statistics:**
+  - 2,191 PMU signatures + 443 PoW signatures (and growing)
+  - 550+ registered users from industry, academia, and national labs
+  - Data spans two U.S. interconnections across multiple utility
+    providers and instrument configurations
+  - Uniform three-level event taxonomy applied across all records
+
+---
+
+#### Event Label Taxonomy
+
+GESL uses a three-level hierarchical labeling system — Group,
+Class, and Subclass — applied uniformly across all data providers. 
+The major event groups relevant to transmission dynamic analysis are:
+
+| Group | Class | Subclass (Examples) | Physical Meaning |
+|---|---|---|---|
+| **Fault** | Transmission Fault | Line-to-Ground, Line-to-Line, Three-Phase | Short circuit events on transmission lines or buses causing sudden voltage drop and current surge |
+| **Generation** | Generator Trip | Sudden loss | A generator suddenly disconnects from the grid causing frequency drop and power redistribution across remaining generators |
+| **Generation** | Generator Reconnection | Planned, Unplanned | A previously offline generator reconnects, causing transient voltage and frequency recovery |
+| **Load** | Load Shedding | Automatic, Manual | Deliberate disconnection of load to prevent frequency collapse during generation shortage |
+| **Oscillation** | Forced Oscillation | Low frequency, Subsynchronous | Periodic disturbance injected by a malfunctioning device causing grid-wide power swings |
+| **Oscillation** | Natural Mode | Inter-area, Local | Poorly damped electromechanical modes causing sustained oscillation without external forcing |
+| **Switching** | Line Trip | Automatic, Manual | Transmission line disconnection due to relay operation or planned switching |
+| **Transient** | Capacitor Bank | Switching-in, Switching-out | Short current surge when capacitor banks switch, can cause brief voltage transients |
+
+---
+
+#### Variable Meanings (Per Downloaded Event `.csv`)
+
+Each downloaded signature file contains time-series synchrophasor
+measurements. The available channels depend on the sensor type
+and provider, but the standard PMU fields are:
+
+| Field | Physical Meaning |
+|---|---|
+| `Timestamp` | UTC time of each measurement frame, GPS-synchronized |
+| `V_mag` | Voltage magnitude in per-unit (pu) or kV — strength of voltage at the measurement point |
+| `V_ang` | Voltage phase angle in degrees — timing offset of the voltage waveform relative to GPS reference |
+| `I_mag` | Current magnitude in pu or amps — amount of current flowing at the measurement point |
+| `I_ang` | Current phase angle in degrees |
+| `Freq_Hz` | Instantaneous grid frequency in Hz — nominal 60 Hz (Eastern/Western US) or 50 Hz |
+| `ROCOF` | Rate of Change of Frequency (Hz/s) — how rapidly the frequency is changing; large values indicate major generation or load events |
+| `Event_Tag` | Three-level hierarchical label: Group / Class / Subclass (e.g., `Generation / Generator_Trip / Sudden_Loss`) |
+
+> **Note:** Not all fields are present in every record — availability
+> depends on the sensor type (PMU vs. PoW) and what the contributing
+> utility provided. The dashboard shows available channels for each
+> signature before download.
+
+---
 
 - **Visual Sample (Illustrative Schema):**
 
-| Timestamp              | V_mag (pu) | V_ang (deg) | Freq_Hz | ROCOF  | Event_Tag      |
-|------------------------|------------|--------------|---------|--------|----------------|
-| 2021-08-14 14:05:00.12 | 1.021      | -14.85       | 60.012  | 0.001  | Normal         |
-| 2021-08-14 14:05:00.15 | 0.874      | -18.20       | 59.850  | -0.152 | Generator_Trip |
+| Timestamp | V_mag (pu) | V_ang (deg) | Freq_Hz | ROCOF | Event_Tag |
+|---|---|---|---|---|---|
+| 2021-08-14 14:05:00.12 | 1.021 | -14.85 | 60.012 | 0.001 | Normal |
+| 2021-08-14 14:05:00.15 | 0.874 | -18.20 | 59.850 | -0.152 | Generation/Generator_Trip/Sudden_Loss |
 
-- **Citation:**  
-  Aaron J. Wilson, Ali Riza Ekti, Jim Follum, Shuchismita Biswas, Christabella Annalicia, Jhi-Young Joo, Omer Aziz, Jamie Lian,  
-  *"The Grid Event Signature Library: An Open-Access Repository of Power System Measurement Signatures,"* IEEE Access, May 2024.  
-  DOI: https://doi.org/10.1109/ACCESS.2024.3404886
+- **Citation:** Aaron J. Wilson, Ali Riza Ekti, Jim Follum,
+  Shuchismita Biswas, Christabella Annalicia, Jhi-Young Joo,
+  Omer Aziz, Jamie Lian, *"The Grid Event Signature Library:
+  An Open-Access Repository of Power System Measurement
+  Signatures,"* IEEE Access, May 2024.
+  DOI: [10.1109/ACCESS.2024.3404886](https://doi.org/10.1109/ACCESS.2024.3404886)
 
 
 ### 7. IRTSD: IBR-Rich Transmission System Disturbance Dataset
