@@ -329,23 +329,120 @@ measurement channel:
   DOI: [10.1038/s41597-022-01455-7](https://doi.org/10.1038/s41597-022-01455-7)
 
 
-### 5. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
+### 4. HIL Cyber-Power Testbed PMU Data — IEEE 39-Bus
 
-- **Description:** High-fidelity synchrophasor recordings from a real-time Hardware-in-the-Loop (HIL) testbed built on the IEEE 39-bus transmission system with 26 optimally placed PMUs. Integrates RTDS, hardware PMUs, RTAC, and ns-3 network emulation to reproduce realistic grid dynamics including communication delays. Covers generator trips, load shedding, line outages, and fault events. Developed at West Virginia University (NSF-funded).
+- **Data Type:** Hardware-in-the-Loop (HIL) — the IEEE 39-bus power
+  system is emulated in real-time using a Real-Time Digital Simulator
+  (RTDS). Physical PMU hardware devices and software PMUs are connected
+  to the RTDS outputs to generate IEEE C37.118-compliant synchrophasor
+  measurements. This bridges pure simulation and real field data — the
+  grid model is simulated but the PMU hardware behavior, communication
+  delays, and measurement noise are real.
+
+- **Description:** High-fidelity synchrophasor recordings from a
+  real-time HIL testbed at West Virginia University built on the IEEE
+  39-bus transmission system. The testbed integrates RTDS, hardware
+  and software PMUs, Real-Time Automation Controller (RTAC), and ns-3
+  network emulation to reproduce realistic grid dynamics including
+  communication latency and event-driven transients. Covers a wide
+  range of labeled grid events designed to reflect actual system
+  behavior. Developed at West Virginia University (NSF-funded). An
+  earlier version of this dataset served as the official competition
+  dataset at IEEE SGSMA 2024, Washington DC.
+
+- **Network/System:** IEEE 39-bus New England transmission system —
+  a standard benchmark representing a simplified model of the New
+  England power grid with 39 buses, 10 generators, 19 loads, and
+  46 transmission lines operating at 100 kV–345 kV.
+
+- **Number of PMUs:** 26 PMUs optimally placed across the IEEE 39-bus
+  system. 24 software PMUs (PMU51–PMU74) and 2 hardware PMUs
+  (SEL401, SEL451) — totaling 26 measurement points.
+
+- **PMU Placement:** PMUs are placed at 26 of the 39 buses, prioritizing
+  generator terminal buses and major transmission corridors for
+  maximum observability. Each PMU produces an independent `.csv` file.
+  Full placement details are provided in the accompanying paper
+  `SGSMA_2025.pdf` available on the dataset page.
+
+- **Recording Duration & Sampling Resolution:** Continuous multi-event
+  recordings pre-split into Training and Testing sets. Each PMU file
+  contains the full time-series across all events in sequence.
+  Reported at **30 Hz** (30 samples per second), IEEE C37.118
+  compliant, GPS-synchronized via IEEE 1588 PTP to within ±1 μs.
+
+- **Network Topology Provided:** ✅ Yes — the IEEE 39-bus system
+  topology, line parameters, generator parameters, and load data are
+  publicly available as a standard IEEE benchmark. The RTDS simulation
+  model details are documented in `SGSMA_2025.pdf` on the dataset page.
+
 - **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
-  > Free IEEE account required. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
+  > ⚠️ Free IEEE account required. Total size: ~314.67 MB.
+  > DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
-- **Data Statistics:** 26 PMU buses on the IEEE 39-bus system. 14 variables per timestamp: three-phase voltage/current magnitudes and angles, frequency, and ROCOF. IEEE C37.118 compliant, GPS-synchronized. Pre-split into Training/Testing folders, one `.csv` per PMU. Total size: ~315 MB.
-- **What the Data Sample Looks Like:** Individual `.csv` files per PMU (e.g., `PMU51.csv` through `PMU74.csv`, `SEL401.csv`, `SEL451.csv`), each containing 14 electrical measurement columns with an event label per row.
+- **Data Statistics:**
+  - 26 PMU files per split (Training + Testing)
+  - Files: `PMU51.csv` through `PMU74.csv` (software PMUs) +
+    `SEL401.csv` and `SEL451.csv` (hardware PMUs)
+  - Training set: ~22–23 MB per PMU file
+  - Testing set: ~11–13 MB per PMU file
+  - Total: ~314.67 MB
+
+---
+
+#### Variable Meanings
+
+Each PMU `.csv` file contains the following 14 measurement columns
+per timestamp, representing three-phase synchrophasor quantities
+at that PMU's bus location:
+
+| Field | Physical Meaning |
+|---|---|
+| `Timestamp` | UTC-synchronized time of each measurement frame (GPS-locked to ±1 μs) |
+| `Va_mag` | Phase A voltage magnitude in per-unit (pu) — strength of voltage on phase A relative to nominal |
+| `Vb_mag` | Phase B voltage magnitude in per-unit (pu) |
+| `Vc_mag` | Phase C voltage magnitude in per-unit (pu) |
+| `Va_ang` | Phase A voltage phase angle in degrees — timing offset of phase A voltage waveform relative to GPS reference |
+| `Vb_ang` | Phase B voltage phase angle in degrees |
+| `Vc_ang` | Phase C voltage phase angle in degrees |
+| `Ia_mag` | Phase A current magnitude in per-unit (pu) — amount of current flowing into/out of the bus on phase A |
+| `Ib_mag` | Phase B current magnitude in per-unit (pu) |
+| `Ic_mag` | Phase C current magnitude in per-unit (pu) |
+| `Ia_ang` | Phase A current phase angle in degrees |
+| `Ib_ang` | Phase B current phase angle in degrees |
+| `Ic_ang` | Phase C current phase angle in degrees |
+| `Freq_Hz` | Instantaneous grid frequency in Hz — nominal is 60 Hz. Deviations indicate generation-load imbalance. |
+| `ROCOF` | Rate of Change of Frequency (Hz/s) — how fast the frequency is changing. Large ROCOF values indicate a sudden generator trip or major fault. |
+| `Event_Label` | Categorical label identifying the event type at this timestamp (see Event Labels below) |
+
+---
+
+#### Event Labels
+
+| Label | Meaning |
+|---|---|
+| `Normal` | Steady-state grid operation — no disturbance occurring |
+| `Generator_Trip` | A generator suddenly disconnects from the grid causing frequency drop and power redistribution |
+| `Generator_Reconnection` | A previously tripped generator reconnects, causing transient voltage and frequency recovery |
+| `Load_Variation` | Gradual or step change in load demand at one or more buses |
+| `Load_Shedding` | Deliberate disconnection of load to prevent frequency collapse |
+| `Line_Outage` | A transmission line is disconnected causing power to reroute through remaining lines |
+| `Fault_Event` | Short-circuit or other fault condition on a bus or transmission line |
+
+---
+
 - **Visual Sample (Illustrative Schema):**
 
 | Timestamp | Va_mag (pu) | Va_ang (deg) | Ia_mag (pu) | Ia_ang (deg) | Freq_Hz | ROCOF | Event_Label |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+|---|---|---|---|---|---|---|---|
 | 1.100 | 1.042 | -8.50 | 0.512 | -15.20 | 60.001 | 0.000 | Normal |
 | 1.133 | 0.651 | -12.10 | 4.850 | -45.60 | 59.980 | -0.042 | Fault_Event |
 
-- **Citation:** M. Mustafa Hussain, Purna Kukadiya, Anurag Srivastava, *"High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed for State Estimation and Event Analysis,"* IEEE DataPort, December 2025. DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
-
+- **Citation:** M. Mustafa Hussain, Purna Kukadiya, Anurag Srivastava,
+  *"High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed
+  for State Estimation and Event Analysis,"* IEEE DataPort,
+  December 2025.
+  DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
 ### 6. ORNL Grid Event Signature Library (GESL) — Transmission Signature Library
 
