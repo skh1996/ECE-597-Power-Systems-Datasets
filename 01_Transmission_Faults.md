@@ -216,7 +216,7 @@ measurement channel:
 
 ### 3. PSML: Multi-Scale Transmission + Distribution PMU Disturbance Dataset
 
-- **Data Type:** ⚠️ Simulated — This dataset is generated from a combined transmission and distribution grid simulation using PSS/E and OpenDSS.
+- **Data Type:** Simulated — This dataset is generated from a combined transmission and distribution grid simulation using PSS/E and OpenDSS.
   Although simulated, it is driven by real-world load, weather, and renewable generation data (2018–2020), resulting in physically realistic measurements.
   All PMU data is synthetic and not collected from real devices.
 
@@ -371,13 +371,13 @@ measurement channel:
   Reported at **30 Hz** (30 samples per second), IEEE C37.118
   compliant, GPS-synchronized via IEEE 1588 PTP to within ±1 μs.
 
-- **Network Topology Provided:** ✅ Yes — the IEEE 39-bus system
+- **Network Topology Provided:** Yes — the IEEE 39-bus system
   topology, line parameters, generator parameters, and load data are
   publicly available as a standard IEEE benchmark. The RTDS simulation
   model details are documented in `SGSMA_2025.pdf` on the dataset page.
 
 - **Download Link:** [IEEE DataPort — High-Fidelity Synchrophasor Dataset from a Real-Time HIL Testbed](https://ieee-dataport.org/documents/high-fidelity-synchrophasor-dataset-real-time-hil-testbed-state-estimation-and-event)
-  > ⚠️ Free IEEE account required. Total size: ~314.67 MB.
+  > Free IEEE account required. Total size: ~314.67 MB.
   > DOI: [10.21227/0mp1-fe58](https://dx.doi.org/10.21227/0mp1-fe58)
 
 - **Data Statistics:**
@@ -446,7 +446,7 @@ at that PMU's bus location:
 
 ### 5. ORNL Grid Event Signature Library (GESL)
 
-- **Data Type:** ✅ Real field data — signatures are collected directly
+- **Data Type:** Real field data — signatures are collected directly
   from operational U.S. electric utility grids. All data providers are
   anonymized to enable open sharing while protecting grid security and
   utility confidentiality.
@@ -489,14 +489,15 @@ at that PMU's bus location:
   - Each downloaded signature includes the full event window
     with pre-event baseline and post-event recovery period
 
-- **Network Topology Provided:** ⚠️ Partially — topology is
+- **Network Topology Provided:** Partially — topology is
   anonymized to protect utility confidentiality. Each event record
   includes a description of the measurement context (transmission
   level vs. distribution level, voltage class, sensor type) but
   not the full grid model.
 
 - **Download Link:** [ORNL Grid Event Signature Library (GESL)](https://gesl.ornl.gov)
-  > ⚠️ Free account required (valid email only, no institutional
+  > Follow the below steps to download/access this dataset.
+  > Free account required (valid email only, no institutional
   > affiliation needed). Once logged in:
   > 1. Click **Signature Dashboard**
   > 2. Filter by event type, sensor type, voltage level, or date
@@ -573,7 +574,7 @@ and provider, but the standard PMU fields are:
 
 ### 6. IRTSD: IBR-Rich Transmission System Disturbance Dataset
 
-- **Data Type:** ⚠️ Simulated — generated using PSCAD electromagnetic
+- **Data Type:**  Simulated — generated using PSCAD electromagnetic
   transient (EMT) software. This is synthetic data from simulation
   results. The PSCAD model is intentionally small in topology but
   uses very detailed representations of IBR controls, traditional
@@ -695,16 +696,106 @@ embedded PMU models at transmission buses:
   Systems,"* IEEE DataPort, December 2024.
   DOI: [10.21227/mp6d-j677](https://dx.doi.org/10.21227/mp6d-j677)
 
-### 8. VSB Power Line Fault Detection
-* **Description:** Three-phase voltage measurements from medium-voltage overhead lines to detect Partial Discharge (PD), a critical precursor to catastrophic grid failure.
-* **Download Link:** [Kaggle - VSB Power Line Fault Detection](https://www.kaggle.com/c/vsb-power-line-fault-detection/data)
-* **Data Statistics:** High-frequency 20ms duration signals (800,000 measurements per signal). 8,712 total signals. Highly Imbalanced (~95% Normal, ~5% Faults).
-* **What the Data Sample Looks Like:** A `.parquet` file containing continuous numeric arrays mapped to a binary target.
-* **Visual Sample (First 2 Rows):**
+### 7. VSB Power Line Fault Detection
 
-| signal_id | phase_0 (V) | phase_1 (V) | phase_2 (V) | target |
-| :--- | :--- | :--- | :--- | :--- |
-| 0 | 18 | -16 | -5 | 0 |
-| 1 | 17 | -17 | -6 | 1 |
+- **Data Type:** Real field data — signals acquired directly from
+  medium-voltage overhead power lines in the Czech Republic using a
+  custom measurement meter designed at the ENET Centre, VSB —
+  Technical University of Ostrava. This is real operational grid
+  data, not a simulation.
 
-- **Citation:** S. Misák, J. Fulnecek, T. Vantuch, T. Buriánek, T. Jezowicz, *"A Complex Classification Approach of Partial Discharges from Covered Conductors in Real Environment,"* IEEE Transactions on Dielectrics and Electrical Insulation, vol. 24, no. 2, pp. 1097–1104, 2017. DOI: [10.1109/TDEI.2017.006135](https://doi.org/10.1109/TDEI.2017.006135)
+- **Description:** Three-phase voltage waveform recordings from
+  medium-voltage (MV) overhead covered conductor lines, captured
+  to detect Partial Discharge (PD) — an electrical discharge in
+  the insulation of a power line that does not completely bridge
+  the conductors but slowly degrades the insulation over time.
+  Left undetected, PD progressively damages the line insulation
+  until it causes a full power outage or fire. Detecting PD early
+  allows utilities to schedule repairs proactively before
+  catastrophic failure occurs. The dataset was originally released
+  as a Kaggle competition in 2019 by the ENET Centre and is backed
+  by a peer-reviewed IEEE publication.
+
+- **Network/System:** Medium-voltage (MV) overhead covered conductor
+  lines in the Czech Republic. Not based on a standard IEEE bus
+  model — this is real infrastructure data from operational
+  distribution-level power lines.
+
+- **Number of PMUs:** Not applicable — signals are captured using
+  a custom-designed waveform measurement meter developed at the
+  ENET Centre, not a standard PMU device. The meter records
+  high-frequency three-phase voltage waveforms directly from the
+  line conductors.
+
+- **Recording Duration & Sampling Resolution:** Each signal captures
+  one 20 ms window (one full cycle of a 50 Hz AC waveform) at
+  800,000 samples per signal — equivalent to a sampling rate of
+  40 MHz. This ultra-high-frequency sampling is what enables
+  detection of the fast transient spikes caused by partial
+  discharge, which occur at nanosecond timescales and would be
+  invisible at conventional PMU sampling rates (30–60 Hz).
+
+- **Network Topology Provided:** Not applicable — this dataset
+  does not provide grid topology. It is a signal-level dataset
+  where each row is an independent waveform recording from a
+  single measurement point on the line.
+
+- **Download Link:** [Kaggle — VSB Power Line Fault Detection](https://www.kaggle.com/c/vsb-power-line-fault-detection/data)
+  > Free Kaggle account required to download competition data.
+
+- **Data Statistics:**
+  - Training set: 8,712 signals × 800,000 samples per signal
+  - Test set: 20,337 signals × 800,000 samples per signal
+  - Format: Apache Parquet (`.parquet`) for signal data +
+    `.csv` for metadata
+  - Class distribution: ~94% Normal (target=0), ~6% Fault
+    (target=1) — highly imbalanced, reflecting real-world
+    rarity of PD events
+  - Recommended evaluation metric: Matthews Correlation
+    Coefficient (MCC) — used due to severe class imbalance
+
+---
+
+#### Variable Meanings
+
+**Signal file (`train.parquet`):**
+
+| Field | Physical Meaning |
+|---|---|
+| Column index (0–8711) | Each column is one signal, identified by `signal_id`. Each column contains 800,000 floating-point voltage amplitude readings sampled over a 20 ms window. Values represent raw voltage amplitude in arbitrary units (digitizer counts), typically ranging from approximately −128 to +127. |
+
+**Metadata file (`metadata_train.csv`):**
+
+| Field | Physical Meaning |
+|---|---|
+| `signal_id` | Unique integer identifier for each signal — used as the join key between signal data and metadata |
+| `id_measurement` | Groups three signals that belong to the same three-phase measurement event. Signals with the same `id_measurement` are the three phases (A, B, C) of one recording |
+| `phase` | Which phase of the three-phase system this signal belongs to — values: 0 (Phase A), 1 (Phase B), 2 (Phase C) |
+| `target` | Binary classification label — `1` if partial discharge is present in this signal, `0` if not. Present only in training data. |
+
+---
+
+#### Event Labels
+
+| Label | Meaning | Count (Training) |
+|---|---|---|
+| `0` — Normal | No partial discharge detected in this signal. The insulation is intact. | ~8,187 signals (94%) |
+| `1` — Fault (PD Present) | Partial discharge pattern detected — insulation degradation is occurring. The line requires maintenance before complete failure. | ~525 signals (6%) |
+
+---
+
+- **Visual Sample (Metadata — `metadata_train.csv`):**
+
+| signal_id | id_measurement | phase | target |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 |
+| 2 | 0 | 2 | 0 |
+| 3 | 1 | 0 | 1 |
+
+- **Citation:** S. Misák, J. Fulnecek, T. Vantuch, T. Buriánek,
+  T. Jezowicz, *"A Complex Classification Approach of Partial
+  Discharges from Covered Conductors in Real Environment,"*
+  IEEE Transactions on Dielectrics and Electrical Insulation,
+  vol. 24, no. 2, pp. 1097–1104, 2017.
+  DOI: [10.1109/TDEI.2017.006135](https://doi.org/10.1109/TDEI.2017.006135)
